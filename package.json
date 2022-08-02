@@ -1,0 +1,21 @@
+{
+  "name": "apexreturns.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lohithsrk/Apex-Returns.git",
+    "prod": "cd client && npm run build && cd .. && git add . && git commit -m 'prod' && git push origin prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lohithsrk/Apex-Returns/issues"
+  },
+  "homepage": "https://github.com/lohithsrk/Apex-Returns#readme"
+}
