@@ -9,7 +9,6 @@
 		"dev": "nodemon server.js",
 		"publish": "git pull origin server"
 	},
-	
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
