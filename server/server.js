@@ -26,12 +26,12 @@ app.use(session({
     }
 }))
 
-// db.connect((err) => {
-//     if (err) {
-//         throw err;
-//     }
-//     console.log('MySql Connected...');
-// })
+db.connect((err) => {
+    if (err) {
+        throw err;
+    }
+    console.log('MySql Connected...');
+})
 
 app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'))
