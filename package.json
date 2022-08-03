@@ -9,7 +9,6 @@
 		"dev": "nodemon server.js",
 		"publish": "git pull origin server"
 	},
-	
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
@@ -20,6 +19,7 @@
 		"express-session": "^1.17.3",
 		"jsonwebtoken": "^8.5.1",
 		"mysql": "^2.18.1",
+		"pm2": "^5.2.0",
 		"uuid": "^8.3.2"
 	}
 }
