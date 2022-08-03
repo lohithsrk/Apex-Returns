@@ -5,7 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "pm2 start server.js && pm2 startup",
+		"start": "pm2 start server.js",
 		"dev": "nodemon server.js",
 		"publish": "git pull origin server"
 	},
