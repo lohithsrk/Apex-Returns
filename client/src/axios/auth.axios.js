@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080/api';
-// const BASE_URL = 'https://apexreturnsserver.herokuapp.com/api';
+// const BASE_URL = 'http://localhost:8080/api';
+const BASE_URL = 'https://apexreturnsserver.herokuapp.com/api';
 
 export const login = async (phone_number, password) =>
     await axios.post(`${BASE_URL}/login`, { phone_number, password })
