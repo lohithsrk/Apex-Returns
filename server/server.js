@@ -34,8 +34,9 @@ db.connect((err) => {
 })
 
 app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'))
-)
+    console.log(__dirname));
+// res.sendFile(path.join(__dirname, '../client', 'build', 'index.html'))
+
 app.use('/api', authRoute)
 app.use('/api', paymentRoute)
 
