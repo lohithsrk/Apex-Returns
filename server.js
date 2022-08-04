@@ -36,8 +36,8 @@ db.connect((err) => {
 // app.get('/', (req, res) =>
 //     res.sendFile(path.join(__dirname, 'build', 'index.html')))
 
-app.use('/api', authRoute)
-app.use('/api', paymentRoute)
+app.use('/', authRoute)
+app.use('/', paymentRoute)
 
 app.listen(process.env.PORT, () =>
     console.log(`Server is running on port ${process.env.PORT}`)
