@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://apexreturns.com/api';
+const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/api' : 'http://apexreturns.com';
 
 export const login = async (phone_number, password) =>
     await axios.post(`${BASE_URL}/login`, { phone_number, password })
