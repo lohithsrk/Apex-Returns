@@ -41,13 +41,13 @@ db.connect((err) => {
     console.log('MySql Connected...');
 })
 
-const route = process.env.NODE_ENV === 'production' ? '/' : '/api'
-app.use(route, authRoute)
-app.use(route, paymentRoute)
-app.use(route, ordersRoute)
-app.use(route, plansRoute)
-app.use(route, investmentRoute)
+// const route = process.env.NODE_ENV === 'production' ? '/' : '/api'
+app.use('/api', authRoute)
+app.use('/api', paymentRoute)
+app.use('/api', ordersRoute)
+app.use('/api', plansRoute)
+app.use('/api', investmentRoute)
 
-app.listen(process.env.PORT, () =>
-    console.log(`Server is running on port ${process.env.PORT}`)
+app.listen(8080, () =>
+    console.log(`Server is running on port ${8080}`)
 );
