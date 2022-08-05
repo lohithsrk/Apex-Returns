@@ -20,7 +20,7 @@ const investmentRoute = require('./routes/investments.route');
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
-app.use(morgan('dev'))
+// app.use(morgan('dev'))
 
 app.use(session({
     secret: process.env.SECRET,
