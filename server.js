@@ -31,8 +31,6 @@ app.use(session({
     }
 }))
 
-console.log(process.env.SECRET);
-
 db.connect((err) => {
     if (err) {
         console.log(err);
