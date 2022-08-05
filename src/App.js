@@ -43,7 +43,9 @@ const App = () => {
         <Route path="/" element={<UserRoute />} >
           <Route path="me" exact element={<Me />} />
         </Route>
-        <Route path="/deposite/apex/payment" element={<Payment />} />
+        <Route path="/" element={<UserRoute />} >
+          <Route path="/deposite/apex/payment" element={<Payment />} />
+        </Route>
         <Route path="/login" element={<Auth />} />
         <Route path="/signup" exact element={<Auth />} />
         <Route path="*" exact element={<p>404</p>} />

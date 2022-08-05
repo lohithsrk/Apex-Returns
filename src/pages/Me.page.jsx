@@ -1,27 +1,35 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
+
+import logo from '../assets/logo-colored.png';
 
 const Me = () => {
 	const dispatch = useDispatch();
 	const { user } = useSelector((state) => ({ ...state }));
 	return (
-		<div>
-			<div className='p-3 h-16'>Logo</div>
-			<div className='bg-blue-400 flex justify-end px-2'>
-				<p className='inline'>My ID: {user.id}</p>
+		<>
+			<Helmet>
+				<title>ME | APEX RETURNS</title>
+			</Helmet>
+			<div>
+				<div className='p-3 h-16'>Logo</div>
+				<div className='bg-[#5271ff] flex justify-end px-2'>
+					<p className='inline'>My ID: {user.id}</p>
+				</div>
+				<div className='grid grid-cols-3'>
+					{buttonDatas.map((buttonData, index) => (
+						<Buttons
+							key={index}
+							img={buttonData.img}
+							text={buttonData.text}
+							dispatch={dispatch}
+						/>
+					))}
+				</div>
 			</div>
-			<div className='grid grid-cols-3'>
-				{buttonDatas.map((buttonData, index) => (
-					<Buttons
-						key={index}
-						img={buttonData.img}
-						text={buttonData.text}
-						dispatch={dispatch}
-					/>
-				))}
-			</div>
-		</div>
+		</>
 	);
 };
 
@@ -53,19 +61,19 @@ const Buttons = ({ img, text, dispatch }) => {
 
 const buttonDatas = [
 	{
-		img: 'https://img.icons8.com/emoji/48/000000/basketball-emoji.png',
+		img: logo,
 		text: 'Buy Apex'
 	},
 	{
-		img: 'https://img.icons8.com/emoji/48/000000/basketball-emoji.png',
+		img: 'https://img.icons8.com/fluency/96/000000/share--v2.png',
 		text: 'Refer a friend'
 	},
 	{
-		img: 'https://img.icons8.com/emoji/48/000000/basketball-emoji.png',
+		img: 'https://img.icons8.com/external-anggara-flat-anggara-putra/32/000000/external-withdraw-business-and-finance-anggara-flat-anggara-putra-2.png',
 		text: 'Withdraw'
 	},
 	{
-		img: 'https://img.icons8.com/emoji/48/000000/basketball-emoji.png',
+		img: 'https://img.icons8.com/fluency-systems-regular/48//quick-mode-on.png',
 		text: 'Deposit'
 	},
 	{

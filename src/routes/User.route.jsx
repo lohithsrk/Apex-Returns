@@ -19,7 +19,6 @@ const UserRoute = () => {
 			validateUser(user.token)
 				.then((res) => {
 					if (!res.data.isLoggedIn) {
-						console.log('User not logged in');
 						dispatch({ type: 'SET_USER', payload: null });
 						toast.success('Please login to continue');
 						navigate('/login');
