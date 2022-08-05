@@ -31,6 +31,8 @@ app.use(session({
     }
 }))
 
+console.log(process.env.SECRET);
+
 db.connect((err) => {
     if (err) {
         console.log(err);
@@ -39,8 +41,6 @@ db.connect((err) => {
     console.log('MySql Connected...');
 })
 
-// app.get('/', (req, res) =>
-//     res.sendFile(path.join(__dirname, 'build', 'index.html')))
 const route = process.env.NODE_ENV === 'production' ? '/' : '/api'
 app.use(route, authRoute)
 app.use(route, paymentRoute)
