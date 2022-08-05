@@ -13,7 +13,7 @@ exports.loginGet = (req, res) => {
                     isLoggedIn: false,
                     error: 'Failed to authenticate token'
                 });
-
+            req.user = decoded;
             res.json({
                 isLoggedIn: true,
                 user: decoded
