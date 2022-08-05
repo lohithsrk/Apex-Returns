@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/api' : 'http://localhost:8080';
+const BASE_URL = 'http://localhost:8080/api';
 
 export const getInvestments = async (user_id) =>
     await axios.get(`${BASE_URL}/investment/${user_id}`)
