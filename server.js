@@ -31,13 +31,13 @@ app.use(session({
     }
 }))
 
-// db.connect((err) => {
-//     if (err) {
-//         console.log(err);
-//         throw err;
-//     }
-//     console.log('MySql Connected...');
-// })
+db.connect((err) => {
+    if (err) {
+        console.log(err);
+        throw err;
+    }
+    console.log('MySql Connected...');
+})
 
 const route = process.env.NODE_ENV === 'production' ? '/' : '/api'
 app.use(route, authRoute)
