@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
+import LOGO_COLORED from '../assets/logo-colored.png';
+import LOGO from '../assets/logo.png';
+
 const Deposite = () => {
 	const [selectedApex, setSelectedApex] = useState(0);
 	const [customApex, setCustomApex] = useState('');
@@ -44,15 +47,15 @@ const Deposite = () => {
 				<div className='flex justify-end items-center text-xs text-center h-16'>
 					<div className='p-2'>
 						<p>Apex</p>
-						<p>₹0.00</p>
+						<p>{user.user.total_apex > 0 ? user.user.total_apex : '0.00'}</p>
 					</div>
 					<span className='w-[2px] block h-4 bg-gray-600' />
 					<div className='p-2'>
 						<p>Balance</p>
-						<p>₹0.00</p>
+						<p>₹{user.user.amount > 0 ? user.user.amount : '0.00'}</p>
 					</div>
 				</div>
-				<div className='bg-[#5271ff] text-white text-xs p-3'>
+				<div className='bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white text-xs p-3'>
 					All investment plans at ApexReturns can only be purchased with Apex.
 					Please click on any of packages below to buy some tickets first before
 					you invest:
@@ -69,13 +72,14 @@ const Deposite = () => {
 						);
 					})}
 					<div
-						className={`flex flex-row items-center justify-start p-3 m-2 border-2 rounded-md cursor-pointer ${
-							selectedApex === 'custom' && 'bg-[#5271ff] text-white'
+						className={`flex flex-row items-center justify-start p-3 m-2 shadow-lg rounded-md cursor-pointer ${
+							selectedApex === 'custom' &&
+							'bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'
 						}`}
 						onClick={() => setSelectedApex('custom')}
 					>
 						<img
-							src='https://img.icons8.com/emoji/48/000000/basketball-emoji.png'
+							src={selectedApex === 'custom' ? LOGO : LOGO_COLORED}
 							alt='Apex'
 							className='w-5 h-5 mr-1'
 						/>
@@ -104,7 +108,7 @@ const Deposite = () => {
 					<p>₹{selectedApex}</p>
 				</div>
 				<div
-					className='p-2 bg-[#5271ff] m-3 rounded-lg text-white text-center'
+					className='p-2 bg-gradient-to-l from-cyan-500 to-[#5271ff] m-3 rounded-lg text-white text-center'
 					onClick={() => handleAddApexClick(selectedApex)}
 				>
 					Add Apex
@@ -118,13 +122,13 @@ const Deposite = () => {
 const ApexsAmount = ({ apex, setSelectedApex, selected }) => {
 	return (
 		<div
-			className={`flex flex-row items-center justify-start p-3 m-2 border-2 rounded-md cursor-pointer ${
-				selected && 'bg-[#5271ff] text-white'
+			className={`flex flex-row items-center justify-start p-3 m-2 shadow-lg rounded-md cursor-pointer ${
+				selected && 'bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'
 			}`}
 			onClick={() => setSelectedApex(apex)}
 		>
 			<img
-				src='https://img.icons8.com/emoji/48/000000/basketball-emoji.png'
+				src={selected ? LOGO : LOGO_COLORED}
 				alt='Apex'
 				className='w-5 h-5 mr-1'
 			/>

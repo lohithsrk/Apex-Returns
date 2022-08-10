@@ -44,12 +44,12 @@ const Payment = () => {
 				<div className='flex justify-end items-center text-xs text-center w-screen h-16 bg-white shadow-lg'>
 					<div className='p-2'>
 						<p>Apex</p>
-						<p>₹0.00</p>
+						<p>{user.user.total_apex > 0 ? user.user.total_apex : '0.00'}</p>
 					</div>
 					<span className='w-[2px] block h-4 bg-gray-600' />
 					<div className='p-2'>
 						<p>Balance</p>
-						<p>₹0.00</p>
+						<p>₹{user.user.amount > 0 ? user.user.amount : '0.00'}</p>
 					</div>
 				</div>
 				<div className='pt-12 flex flex-col items-center text-white text-center'>
@@ -66,7 +66,7 @@ const Payment = () => {
 					<div
 						className={`${
 							window.innerWidth > 800 ? 'hidden' : 'block'
-						} bg-[#5271ff] w-full rounded-lg mt-3 py-2`}
+						} bg-gradient-to-l from-cyan-500 to-[#5271ff] w-full rounded-lg mt-3 py-2`}
 						onClick={() => (window.location = paymentLink)}
 					>
 						OPEN UPI APP
@@ -82,7 +82,7 @@ const Payment = () => {
 						onPaste={(e) => setReferenceID(e.target.value)}
 					/>
 					<button
-						className='bg-[#5271ff] w-full rounded-lg mt-3 py-2'
+						className='bg-gradient-to-l from-cyan-500 to-[#5271ff] w-full rounded-lg mt-3 py-2'
 						onClick={handleSubmit}
 					>
 						Confirm

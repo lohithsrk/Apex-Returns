@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { getApexPlans } from '../axios/apexPlans.axios';
 import { investmentPost } from '../axios/investments.axios';
 
+import LOGO from '../assets/logo.png';
+
 const Home = () => {
 	const user = useSelector((state) => state.user);
 	const dispatch = useDispatch();
@@ -28,23 +30,26 @@ const Home = () => {
 			<Helmet>
 				<title>HOME | APEX RETURNS</title>
 			</Helmet>
-			<div className='flex justify-end items-center text-xs text-center h-16'>
-				<div className='p-2'>
-					<p>Apex</p>
-					<p>{user.user.total_apex ? user.user.total_apex : 0}</p>
-				</div>
-				<span className='w-[2px] block h-4 bg-gray-600' />
-				<div className='p-2'>
-					<p>Balance</p>
-					<p>₹{user.user.total_apex ? user.user.total_apex : '0.00'}</p>
+			<div className='flex justify-between items-center text-xs text-center h-16 bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'>
+				<img src={LOGO} alt='APEX RETURNS' className='w-14 ml-2' />
+				<div className='flex items-center justify-center'>
+					<div className='p-2'>
+						<p>Apex</p>
+						<p>{user.user.total_apex > 0 ? user.user.total_apex : 0}</p>
+					</div>
+					<span className='w-[2px] block h-4 bg-white' />
+					<div className='p-2'>
+						<p>Balance</p>
+						<p>₹{user.user.amount > 0 ? user.user.amount : '0.00'}</p>
+					</div>
 				</div>
 			</div>
-			<div className='flex flex-1 w-screen h-screen bg-gradient-to-l from-cyan-500 to-[#5271ff] pb-20'>
+			<div className='flex flex-1 w-screen h-screen pb-20'>
 				<div className='flex flex-col items-center w-screen'>
 					{apexPlans.map((plan, index) => {
 						return (
 							<div
-								className='bg-white bg-opacity-20 backdrop-blur-md p-4  rounded-lg w-5/6 m-5 shadow-lg'
+								className='bg-gradient-to-l from-cyan-500 to-[#5271ff]  bg-opacity-20 backdrop-blur-md p-4  rounded-lg w-5/6 m-5 shadow-lg'
 								key={index}
 							>
 								<div className='flex bg-gradient-to-l from-cyan-500 to-[#5271ff] p-2 rounded-lg text-white text-center items-center justify-between w-full'>
@@ -86,13 +91,13 @@ const Home = () => {
 									</div>
 								</div>
 								<div
-									className='bg-gradient-to-l from-cyan-500 to-[#5271ff] p-2 rounded-lg text-white text-center'
+									className='bg-white text-[#5271ff] p-2 rounded-lg font-semibold text-center'
 									onClick={() => {
 										setChoosenPlan(plan);
 										setIsConfirmOpened(true);
 									}}
 								>
-									{plan.deposit_amount} Apex
+									{plan.deposit_amount} APEX
 								</div>
 							</div>
 						);
@@ -129,16 +134,23 @@ const InvestConfirm = ({
 				'You do not have enough Apex to invest. Buy some here.'
 			);
 		}
-		await investmentPost(investment_id, user_id, amount).then((res) => {
-			dispatch({
-				type: 'SET_USER',
-				payload: {
-					token: user.token,
-					isLoggedIn: true,
-					user: { ...res.data.user, total_apex: res.data.total_apex - amount }
-				}
+		await investmentPost(investment_id, user_id, amount)
+			.then((res) => {
+				dispatch({
+					type: 'SET_USER',
+					payload: {
+						token: user.token,
+						isLoggedIn: true,
+						user: {
+							...res.data.user,
+							total_apex: res.data.total_apex - amount
+						}
+					}
+				});
+			})
+			.catch((err) => {
+				return toast.error(err.response.data);
 			});
-		});
 	};
 	return (
 		<div
@@ -170,7 +182,7 @@ const InvestConfirm = ({
 					<span>{choosenPlan.total_return}</span>
 				</div>
 				<div
-					className='w-full p-2 mt-2 text-center text-white bg-[#5271ff] rounded'
+					className='w-full p-2 mt-2 text-center text-white bg-gradient-to-l from-cyan-500 to-[#5271ff] rounded'
 					onClick={() =>
 						handleInvest(
 							user.user.id,

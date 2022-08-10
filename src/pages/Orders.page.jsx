@@ -5,6 +5,8 @@ import Helmet from 'react-helmet';
 
 import { ordersGet } from '../axios/orders.route';
 
+import LOGO from '../assets/logo-colored.png';
+
 const Orders = () => {
 	const [status, setStatus] = useState('pending');
 	const [orders, setOrders] = useState([]);
@@ -26,22 +28,25 @@ const Orders = () => {
 				<title>ORDERS | APEX RETURNS</title>
 			</Helmet>
 			<div>
-				<div className='flex justify-end items-center text-xs text-center h-16'>
-					<div className='p-2'>
-						<p>
-							Obtained <br /> Already
-						</p>
-						<p>₹0.00</p>
-					</div>
-					<span className='w-[2px] block h-4 bg-gray-600' />
-					<div className='p-2'>
-						<p>
-							Current <br /> Daily Returns
-						</p>
-						<p>₹0.00</p>
+				<div className='flex justify-between items-center text-xs text-center h-16 shadow-lg'>
+					<img src={LOGO} alt='APEX RETURNS' className='w-16 ml-2' />
+					<div className='flex justify-center items-center'>
+						<div className='p-2'>
+							<p>
+								Obtained <br /> Already
+							</p>
+							<p>₹0.00</p>
+						</div>
+						<span className='w-[2px] block h-4 bg-gray-600' />
+						<div className='p-2'>
+							<p>
+								Current <br /> Daily Returns
+							</p>
+							<p>₹0.00</p>
+						</div>
 					</div>
 				</div>
-				<div className='bg-[#5271ff] text-white text-xs px-6 py-3 '>
+				<div className='bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white text-xs px-6 py-3 '>
 					<ul className='list-disc'>
 						<li>
 							Only 24H after deposit, rather than the moment you purchase, you
@@ -92,7 +97,7 @@ const Orders = () => {
 										<br />
 										{
 											new Date(order.created_at).toLocaleString().split(',')[0]
-										}{' '}
+										}
 										<br />
 										{new Date(order.created_at).toLocaleString().split(',')[1]}
 									</div>

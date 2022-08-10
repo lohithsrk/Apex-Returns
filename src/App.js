@@ -5,10 +5,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home.page';
 import Orders from './pages/Orders.page';
 import Deposite from './pages/Deposite.page';
-import Team from './pages/Team.page';
+import Plans from './pages/Plans.page';
 import Me from './pages/Me.page';
 import Auth from './pages/Auth.page';
 import Payment from './pages/Payment.page';
+import Withdraw from './pages/Withdraw.page';
 
 import UserRoute from './routes/User.route';
 
@@ -38,13 +39,16 @@ const App = () => {
           <Route path="deposite" element={<Deposite />} />
         </Route>
         <Route path="/" element={<UserRoute />} >
-          <Route path="team" element={<Team />} />
+          <Route path="plans" element={<Plans />} />
         </Route>
         <Route path="/" element={<UserRoute />} >
           <Route path="me" exact element={<Me />} />
         </Route>
         <Route path="/" element={<UserRoute />} >
           <Route path="/deposite/apex/payment" element={<Payment />} />
+        </Route>
+        <Route path="/" element={<UserRoute />} >
+          <Route path="/withdraw" element={<Withdraw />} />
         </Route>
         <Route path="/login" element={<Auth />} />
         <Route path="/signup" exact element={<Auth />} />

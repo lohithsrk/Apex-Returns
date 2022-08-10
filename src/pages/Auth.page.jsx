@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
+import LOGO from '../assets/logo.png';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -109,72 +110,74 @@ const Auth = () => {
 			<Helmet>
 				<title>LOGIN | SIGNUP</title>
 			</Helmet>
-			<div className='flex flex-1 flex-col h-screen items-center bg-gradient-to-b from-[#5271ff] to-[#ffffff] pt-32'>
-				<h1>ApexReturns</h1>
-				<div className='flex justify-between p-1 items-center bg-gray-600 bg-opacity-40 rounded-full relative my-6'>
-					<div
-						className={`bg-white w-1/2 h-8 rounded-full absolute ${
-							authPage === '/signup' && '-translate-x-1 right-0'
-						}`}
-					></div>
-					<h3
-						className={`text-center w-28 py-1 ${
-							authPage === '/signup' ? 'text-white z-0' : 'text-black z-10'
-						}`}
-						onClick={() => {
-							setAuthPage('/login');
-							setPhone_number('');
-							setPassword('');
-							setConfirmPassword('');
-						}}
-					>
-						Existing
-					</h3>
-					<h3
-						className={`text-center w-28 py-1 ${
-							authPage === '/signup' ? 'text-black z-10' : 'text-white z-0'
-						}`}
-						onClick={() => {
-							setAuthPage('/signup');
-							setPhone_number('');
-							setPassword('');
-							setConfirmPassword('');
-						}}
-					>
-						New
-					</h3>
-				</div>
-				<form onSubmit={handleSubmit} className='w-full'>
-					<div className='w-3/4 p-7 pb-0 flex flex-col bg-white rounded-lg items-center justify-center mx-auto'>
-						<PhoneInput
-							phone_number={phone_number}
-							setPhone_number={setPhone_number}
-						/>
-						<PasswordInput
-							showPassword={showPassword}
-							setShowPassword={setShowPassword}
-							password={password}
-							setPassword={setPassword}
-							name='Password'
-						/>
-						{authPage === '/signup' && (
+			<div className='flex flex-1 flex-col h-screen items-center bg-gradient-to-br from-cyan-500 to-[#5271ff] pt-32'>
+				<div className='-translate-y-10 flex flex-col items-center'>
+					<img src={LOGO} alt='APEX RETURNS' className='w-24' />
+					<div className='flex justify-between p-1 items-center bg-gray-600 bg-opacity-40 rounded-full relative my-6'>
+						<div
+							className={`bg-white w-1/2 h-8 rounded-full absolute ${
+								authPage === '/signup' && '-translate-x-1 right-0'
+							}`}
+						></div>
+						<h3
+							className={`text-center w-28 py-1 ${
+								authPage === '/signup' ? 'text-white z-0' : 'text-black z-10'
+							}`}
+							onClick={() => {
+								setAuthPage('/login');
+								setPhone_number('');
+								setPassword('');
+								setConfirmPassword('');
+							}}
+						>
+							Existing
+						</h3>
+						<h3
+							className={`text-center w-28 py-1 ${
+								authPage === '/signup' ? 'text-black z-10' : 'text-white z-0'
+							}`}
+							onClick={() => {
+								setAuthPage('/signup');
+								setPhone_number('');
+								setPassword('');
+								setConfirmPassword('');
+							}}
+						>
+							New
+						</h3>
+					</div>
+					<form onSubmit={handleSubmit} className='w-full'>
+						<div className='w-3/4 p-7 pb-0 flex flex-col bg-white rounded-lg items-center justify-center mx-auto'>
+							<PhoneInput
+								phone_number={phone_number}
+								setPhone_number={setPhone_number}
+							/>
 							<PasswordInput
 								showPassword={showPassword}
 								setShowPassword={setShowPassword}
-								password={confirmPassword}
-								setPassword={setConfirmPassword}
-								name='Confirm Password'
-								style={{ marginTop: '1rem' }}
+								password={password}
+								setPassword={setPassword}
+								name='Password'
 							/>
-						)}
-						<button className='bg-[#5271ff] w-min p-3 px-10 rounded-lg relative bottom-0 translate-y-1/2 font-semibold text-white'>
-							{authPage !== '/signup' ? 'LOGIN' : 'SIGNUP'}
-						</button>
-					</div>
-				</form>
-				<Link className='text-white mt-10' to='/forget-password'>
-					Forgot Password?
-				</Link>
+							{authPage === '/signup' && (
+								<PasswordInput
+									showPassword={showPassword}
+									setShowPassword={setShowPassword}
+									password={confirmPassword}
+									setPassword={setConfirmPassword}
+									name='Confirm Password'
+									style={{ marginTop: '1rem' }}
+								/>
+							)}
+							<button className='bg-gradient-to-l from-cyan-500 to-[#5271ff] w-min p-3 px-10 rounded-lg relative bottom-0 translate-y-1/2 font-semibold text-white'>
+								{authPage !== '/signup' ? 'LOGIN' : 'SIGNUP'}
+							</button>
+						</div>
+					</form>
+					<Link className='text-white mt-10' to='/forget-password'>
+						Forgot Password?
+					</Link>
+				</div>
 			</div>
 		</>
 	);
