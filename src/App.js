@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from './pages/Home.page';
 import Orders from './pages/Orders.page';
 import Deposite from './pages/Deposite.page';
-import Plans from './pages/Plans.page';
+// import Plans from './pages/Plans.page';
 import Me from './pages/Me.page';
 import Auth from './pages/Auth.page';
 import Payment from './pages/Payment.page';
