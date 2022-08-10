@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:8080/api';
+import { BASE_URL } from '../utils/common.util';
 
 export const getInvestments = async (user_id) =>
     await axios.get(`${BASE_URL}/investment/${user_id}`)

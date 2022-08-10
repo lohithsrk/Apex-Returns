@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080/api';
+import { BASE_URL } from '../utils/common.util';
 
 export const ordersGet = async (status, user_id) =>
     await axios.post(`${BASE_URL}/orders`, { status, user_id })
