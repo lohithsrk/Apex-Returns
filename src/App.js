@@ -38,9 +38,9 @@ const App = () => {
         <Route path="/" element={<UserRoute />} >
           <Route path="deposite" element={<Deposite />} />
         </Route>
-        <Route path="/" element={<UserRoute />} >
-          <Route path="plans" element={<Plans />} />
-        </Route>
+        {/* <Route path="/" element={<UserRoute />} > */}
+        {/* <Route path="plans" element={<Plans />} /> */}
+        {/* </Route> */}
         <Route path="/" element={<UserRoute />} >
           <Route path="me" exact element={<Me />} />
         </Route>
