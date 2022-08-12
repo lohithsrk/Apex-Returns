@@ -3,6 +3,6 @@ const router = express.Router();
 
 const { paymentPost } = require('../controllers/payment.controller');
 
-router.route('/deposite/apex/payment').post(paymentPost);
+router.route('/deposit/apex/payment').post(paymentPost);
 
 module.exports = router;

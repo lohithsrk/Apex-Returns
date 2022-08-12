@@ -4,7 +4,8 @@ const db = require('../database');
 
 exports.withdrawPost = async (req, res) => {
     const { amount, user_id, upi_id } = req.body;
-    await db.query('INSERT INTO withdraw SET id = ?, amount = ?, user_id = ?, upi_id = ?, created_at = ?', [uuidv4(), amount, user_id, upi_id, new Date()], (err, result) => {
+    const taxDeductedAmount = amount * 0.08;
+    await db.query('INSERT INTO withdraw SET id = ?, amount = ?, user_id = ?, upi_id = ?, created_at = ?', [uuidv4(), taxDeductedAmount, user_id, upi_id, new Date()], (err, result) => {
         if (err) {
             console.log(err);
             return res.status(500).send('Error');
