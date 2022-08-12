@@ -23,6 +23,7 @@ const Auth = () => {
 	const [phone_number, setPhone_number] = useState('');
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
+	const [referalID, setReferalID] = useState('');
 
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -61,7 +62,7 @@ const Auth = () => {
 					toast.error('Passwords do not match');
 					return;
 				}
-				await signup(phone_number, password)
+				await signup(phone_number, password, referalID)
 					.then((res) => {
 						dispatch({
 							type: 'SET_USER',
@@ -77,6 +78,7 @@ const Auth = () => {
 						setPhone_number('');
 						setPassword('');
 						setConfirmPassword('');
+						setReferalID('');
 
 						toast.error(err.response.data.error);
 					});
@@ -97,6 +99,7 @@ const Auth = () => {
 						setPhone_number('');
 						setPassword('');
 						setConfirmPassword('');
+						setReferalID('');
 						toast.error(err.response.data.error);
 					});
 			}
@@ -110,9 +113,15 @@ const Auth = () => {
 			<Helmet>
 				<title>LOGIN | SIGNUP</title>
 			</Helmet>
-			<div className='flex flex-1 flex-col h-screen items-center bg-gradient-to-br from-cyan-500 to-[#5271ff] pt-32'>
-				<div className='-translate-y-10 flex flex-col items-center'>
-					<img src={LOGO} alt='APEX RETURNS' className='w-48 drop-shadow-lg' />
+			<div className='flex flex-1 flex-col h-screen  bg-gradient-to-br from-cyan-500 to-[#5271ff] pt-32'>
+				<div className='-translate-y-24 flex flex-col items-center h-screen'>
+					<img src={LOGO} alt='APEX RETURNS' className='w-48 drop-shadow-lg ' />
+
+					<img
+						src='https://img.icons8.com/windows/96/5271ff/gender-neutral-user.png'
+						alt='APEX RETURNS'
+						className='w-24 mt-5 drop-shadow-lg bg-white rounded-full p-3 shadow-md'
+					/>
 					<div className='flex justify-between p-1 items-center bg-gray-600 bg-opacity-40 rounded-full relative my-6'>
 						<div
 							className={`bg-white w-1/2 h-8 rounded-full absolute ${
@@ -121,7 +130,9 @@ const Auth = () => {
 						></div>
 						<h3
 							className={`text-center w-28 py-1 ${
-								authPage === '/signup' ? 'text-white z-0' : 'text-[#5271ff] z-10'
+								authPage === '/signup'
+									? 'text-white z-0'
+									: 'text-[#5271ff] z-10'
 							}`}
 							onClick={() => {
 								setAuthPage('/login');
@@ -134,7 +145,9 @@ const Auth = () => {
 						</h3>
 						<h3
 							className={`text-center w-28 py-1 ${
-								authPage === '/signup' ? 'text-[#5271ff] z-10' : 'text-white z-0'
+								authPage === '/signup'
+									? 'text-[#5271ff] z-10'
+									: 'text-white z-0'
 							}`}
 							onClick={() => {
 								setAuthPage('/signup');
@@ -147,7 +160,7 @@ const Auth = () => {
 						</h3>
 					</div>
 					<form onSubmit={handleSubmit} className='w-full'>
-						<div className='w-3/4 p-7 pb-0 flex flex-col bg-white rounded-lg items-center justify-center mx-auto'>
+						<div className='w-3/4 p-7 pl-4 pb-0 flex flex-col bg-white rounded-lg items-center justify-center mx-auto'>
 							<PhoneInput
 								phone_number={phone_number}
 								setPhone_number={setPhone_number}
@@ -160,14 +173,39 @@ const Auth = () => {
 								name='Password'
 							/>
 							{authPage === '/signup' && (
-								<PasswordInput
-									showPassword={showPassword}
-									setShowPassword={setShowPassword}
-									password={confirmPassword}
-									setPassword={setConfirmPassword}
-									name='Confirm Password'
-									style={{ marginTop: '1rem' }}
-								/>
+								<>
+									<PasswordInput
+										showPassword={showPassword}
+										setShowPassword={setShowPassword}
+										password={confirmPassword}
+										setPassword={setConfirmPassword}
+										name='Confirm Password'
+										style={{ marginTop: '0' }}
+									/>
+									<div className='flex'>
+										<img
+											src='https://img.icons8.com/material-rounded/48/5271ff/share.png'
+											className='h-8 mr-2 drop-shadow-lg '
+										/>
+										<TextField
+											id='outlined-basic'
+											size='small'
+											label='Referal ID'
+											variant='outlined'
+											sx={{
+												width: '100%'
+											}}
+											value={referalID}
+											onInput={(e) => {
+												setReferalID(e.target.value.replace(/[^0-9]/g, ''));
+											}}
+											inputProps={{
+												maxLength: 10,
+												minLength: 10
+											}}
+										/>
+									</div>
+								</>
 							)}
 							<button className='bg-gradient-to-l from-cyan-500 to-[#5271ff] w-min p-3 px-10 rounded-lg relative bottom-0 translate-y-1/2 font-semibold text-white'>
 								{authPage !== '/signup' ? 'LOGIN' : 'SIGNUP'}
@@ -185,24 +223,29 @@ const Auth = () => {
 
 const PhoneInput = ({ phone_number, setPhone_number }) => {
 	return (
-		<TextField
-			id='outlined-basic'
-			size='small'
-			label='Phone'
-			variant='outlined'
-			sx={{
-				width: '100%',
-				marginBottom: '1rem'
-			}}
-			value={phone_number}
-			onInput={(e) => {
-				setPhone_number(e.target.value.replace(/[^0-9]/g, ''));
-			}}
-			inputProps={{
-				maxLength: 10,
-				minLength: 10
-			}}
-		/>
+		<div className='flex mb-3'>
+			<img
+				src='https://img.icons8.com/ios-filled/100/5271ff/phone.png'
+				className='h-8 mr-2 drop-shadow-lg'
+			/>
+			<TextField
+				id='outlined-basic'
+				size='small'
+				label='Phone'
+				variant='outlined'
+				sx={{
+					width: '100%'
+				}}
+				value={phone_number}
+				onInput={(e) => {
+					setPhone_number(e.target.value.replace(/[^0-9]/g, ''));
+				}}
+				inputProps={{
+					maxLength: 10,
+					minLength: 10
+				}}
+			/>
+		</div>
 	);
 };
 
@@ -215,32 +258,38 @@ const PasswordInput = ({
 	style
 }) => {
 	return (
-		<FormControl variant='outlined' sx={style}>
-			<InputLabel size='small' htmlFor='outlined-adornment-password'>
-				{name}
-			</InputLabel>
-			<OutlinedInput
-				className='w-full'
-				id='outlined-adornment-password'
-				type={showPassword ? 'text' : 'password'}
-				value={password}
-				onChange={(e) => setPassword(e.target.value)}
-				size='small'
-				endAdornment={
-					<InputAdornment position='end'>
-						<IconButton
-							aria-label='toggle password visibility'
-							onClick={() => setShowPassword(!showPassword)}
-							onMouseDown={(e) => e.preventDefault()}
-							edge='end'
-						>
-							{showPassword ? <VisibilityOff /> : <Visibility />}
-						</IconButton>
-					</InputAdornment>
-				}
-				label='Password'
+		<div className='flex mb-3'>
+			<img
+				src='https://img.icons8.com/material-outlined/48/5271ff/lock--v1.png'
+				className='h-8 mr-2 drop-shadow-lg'
 			/>
-		</FormControl>
+			<FormControl variant='outlined' sx={style}>
+				<InputLabel size='small' htmlFor='outlined-adornment-password'>
+					{name}
+				</InputLabel>
+				<OutlinedInput
+					className='w-full'
+					id='outlined-adornment-password'
+					type={showPassword ? 'text' : 'password'}
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					size='small'
+					endAdornment={
+						<InputAdornment position='end'>
+							<IconButton
+								aria-label='toggle password visibility'
+								onClick={() => setShowPassword(!showPassword)}
+								onMouseDown={(e) => e.preventDefault()}
+								edge='end'
+							>
+								{showPassword ? <VisibilityOff /> : <Visibility />}
+							</IconButton>
+						</InputAdornment>
+					}
+					label='Password'
+				/>
+			</FormControl>
+		</div>
 	);
 };
 

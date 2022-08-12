@@ -365,14 +365,14 @@ const InvestConfirm = ({
 	dispatch,
 	navigate
 }) => {
-	const handleInvest = async (investment_id, user_id, amount) => {
+	const handleInvest = async (investment_id, user_id, amount, reference_id) => {
 		if (user.user.total_apex < amount) {
 			navigate('/deposit');
 			return toast.error(
 				'You do not have enough Apex to invest. Buy some here.'
 			);
 		}
-		await investmentPost(investment_id, user_id, amount)
+		await investmentPost(investment_id, user_id, amount,reference_id)
 			.then((res) => {
 				dispatch({
 					type: 'SET_USER',
@@ -425,7 +425,8 @@ const InvestConfirm = ({
 						handleInvest(
 							user.user.id,
 							choosenPlan.id,
-							choosenPlan.deposit_amount
+							choosenPlan.deposit_amount,
+							user.user.reference_id
 						)
 					}
 				>

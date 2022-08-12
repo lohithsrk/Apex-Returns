@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
@@ -11,8 +10,6 @@ import LOGO_FULL from '../assets/logo_full_white.png';
 const Me = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-	const [isReferOpened, setIsReferOpened] = useState(true);
 
 	const { user } = useSelector((state) => ({ ...state }));
 	return (
@@ -29,12 +26,17 @@ const Me = () => {
 				</div>
 				<div className='flex justify-between items-center text-xs p-2 bg-gray-100'>
 					<h2>Refer your friends and get rewarded of 50 APEX</h2>
-					<button
-						className='text-white bg-[#5271ff] rounded px-4 py-2 h-fit'
-						onClick={() => setIsReferOpened(true)}
+					<RWebShare
+						data={{
+							text: `Use this referal id to get 50 APEX as reward "${user.user.id}"`,
+							url: 'https://apexreturns.com/',
+							title: 'Apex Returns'
+						}}
 					>
-						Refer
-					</button>
+						<button className='text-white bg-[#5271ff] rounded px-4 py-2 h-fit'>
+							Refer
+						</button>
+					</RWebShare>
 				</div>
 				<div className='grid grid-cols-3'>
 					{buttonDatas.map((buttonData, index) => (
@@ -49,32 +51,7 @@ const Me = () => {
 					))}
 				</div>
 			</div>
-			{isReferOpened && (
-				<RWebShare
-					data={{
-						text: 'Web Share - GfG',
-						url: 'http://localhost:3000',
-						title: 'GfG'
-					}}
-					onClick={() => console.log('shared successfully!')}
-				>
-					<button>Share on Web</button>
-				</RWebShare>
-			)}
 		</>
-	);
-};
-
-const ReferPopup = ({ setIsReferOpened }) => {
-	return (
-		<div
-			onClick={() => setIsReferOpened(false)}
-			className='w-screen h-screen  top-0 left-0 absolute z-50 bg-black opacity-50'
-		>
-			<div>
-				<h1>Web Share - GeeksforGeeks</h1>
-			</div>
-		</div>
 	);
 };
 
