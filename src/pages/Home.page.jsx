@@ -284,62 +284,58 @@ const Home = () => {
 					Plans you can invest
 				</h1>
 				<div className='flex flex-col items-center w-screen'>
-					{apexPlans.map((plan, index) => {
-						return (
-							<div
-								className='bg-gradient-to-l from-cyan-500 to-[#5271ff]  bg-opacity-20 backdrop-blur-md p-4  rounded-lg w-5/6 m-5 shadow-lg'
-								key={index}
-							>
-								<div className='flex bg-gradient-to-l from-cyan-500 to-[#5271ff] p-2 rounded-lg text-white text-center items-center justify-between w-full'>
-									<div>APEX RETURNS</div>
-									<div className='flex'>
-										<h3>{plan.name}</h3>
-										<span>|</span>
-										<h3>
-											Total &nbsp;
-											{percentage(
-												plan.daily_returns,
-												plan.return_period,
-												plan.deposit_amount
-											)}
-											%
-										</h3>
-									</div>
-								</div>
-								<div className='flex w-full items-center justify-between p-2 text-white'>
-									<div className='text-left'>
-										<div>
-											<p>Deposit Amount</p>
-											<p>{plan.deposit_amount}</p>
-										</div>
-										<div>
-											<p>Return Period</p>
-											<p>{plan.return_period}</p>
-										</div>
-									</div>
-									<div className='text-right'>
-										<div>
-											<p>Daily Returns</p>
-											<p>{plan.daily_returns}</p>
-										</div>
-										<div>
-											<p>Total Returns</p>
-											<p>{plan.total_return}</p>
-										</div>
-									</div>
-								</div>
+					{apexPlans
+						.sort(function (a, b) {
+							// Turn your strings into dates, and then subtract them
+							// to get a value that is either negative, positive, or zero.
+							return new Date(b.created_at) - new Date(a.created_at);
+						})
+						.map((plan, index) => {
+							return (
 								<div
-									className='bg-white text-[#5271ff] p-2 rounded-lg font-semibold text-center'
-									onClick={() => {
-										setChoosenPlan(plan);
-										setIsConfirmOpened(true);
-									}}
+									className='bg-gradient-to-l from-cyan-500 to-[#5271ff]  bg-opacity-20 backdrop-blur-md p-4  rounded-lg w-5/6 m-5 shadow-lg'
+									key={index}
 								>
-									{plan.deposit_amount} APEX
+									<div className='flex bg-gradient-to-l from-cyan-500 to-[#5271ff] p-2 rounded-lg text-white text-center items-center justify-between w-full'>
+										<div className='flex justify-between w-full'>
+											<div>APEX RETURNS</div>
+											<h3>{plan.name}</h3>
+										</div>
+									</div>
+									<div className='flex w-full items-center justify-between p-2 text-white'>
+										<div className='text-left'>
+											<div>
+												<p>Deposit Amount</p>
+												<p>{plan.deposit_amount}</p>
+											</div>
+											<div>
+												<p>Return Period</p>
+												<p>{plan.return_period}</p>
+											</div>
+										</div>
+										<div className='text-right'>
+											<div>
+												<p>Daily Returns</p>
+												<p>{plan.daily_returns}%</p>
+											</div>
+											<div>
+												<p>Total Returns</p>
+												<p>{plan.total_return}</p>
+											</div>
+										</div>
+									</div>
+									<div
+										className='bg-white text-[#5271ff] p-2 rounded-lg font-semibold text-center'
+										onClick={() => {
+											setChoosenPlan(plan);
+											setIsConfirmOpened(true);
+										}}
+									>
+										{plan.deposit_amount} APEX
+									</div>
 								</div>
-							</div>
-						);
-					})}
+							);
+						})}
 				</div>
 			</div>
 			{isConfirmOpened && (
@@ -372,7 +368,7 @@ const InvestConfirm = ({
 				'You do not have enough Apex to invest. Buy some here.'
 			);
 		}
-		await investmentPost(investment_id, user_id, amount,reference_id)
+		await investmentPost(investment_id, user_id, amount, reference_id)
 			.then((res) => {
 				dispatch({
 					type: 'SET_USER',
@@ -409,7 +405,7 @@ const InvestConfirm = ({
 				</div>
 				<div className='flex justify-between pb-2'>
 					<span>Daily returns</span>
-					<span>{choosenPlan.daily_returns}</span>
+					<span>{choosenPlan.daily_returns}%</span>
 				</div>
 				<div className='flex justify-between pb-2'>
 					<span>Return period</span>

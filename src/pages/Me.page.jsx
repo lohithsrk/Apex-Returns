@@ -25,10 +25,10 @@ const Me = () => {
 					<p className='inline text-white text-sm'>My ID: {user.user.id}</p>
 				</div>
 				<div className='flex justify-between items-center text-xs p-2 bg-gray-100'>
-					<h2>Refer your friends and get rewarded of 50 APEX</h2>
+					<h2>Refer your friends and get rewarded of ₹50</h2>
 					<RWebShare
 						data={{
-							text: `Use this referal id to get 50 APEX as reward "${user.user.id}"`,
+							text: `Use this referal id to get ₹50 as reward "${user.user.id}"`,
 							url: 'https://apexreturns.com/',
 							title: 'Apex Returns'
 						}}
