@@ -25,7 +25,7 @@ const Payment = () => {
 		await createdeposit(user.user.id, amount, referenceID).then((res) => {
 			if (res.data.message === 'Success') {
 				toast.success(
-					'Payment successful. Your APEX will be added to your account soon.'
+					'Payment waiting for confirmation. Your APEX will be added to your account after confirmation.'
 				);
 				navigate('/');
 			} else {

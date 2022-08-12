@@ -20,6 +20,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.7",
     "react-uuid": "^1.0.2",
+    "react-web-share": "^1.1.6",
     "redux": "^4.2.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",

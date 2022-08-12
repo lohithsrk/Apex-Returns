@@ -1,8 +1,9 @@
-import React from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
+import { RWebShare } from 'react-web-share';
 
 import LOGO from '../assets/logo-colored.png';
 import LOGO_FULL from '../assets/logo_full_white.png';
@@ -10,6 +11,8 @@ import LOGO_FULL from '../assets/logo_full_white.png';
 const Me = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+
+	const [isReferOpened, setIsReferOpened] = useState(true);
 
 	const { user } = useSelector((state) => ({ ...state }));
 	return (
@@ -24,6 +27,15 @@ const Me = () => {
 				<div className='bg-gradient-to-l from-cyan-500 to-[#5271ff] flex justify-end px-2 py-1'>
 					<p className='inline text-white text-sm'>My ID: {user.user.id}</p>
 				</div>
+				<div className='flex justify-between items-center text-xs p-2 bg-gray-100'>
+					<h2>Refer your friends and get rewarded of 50 APEX</h2>
+					<button
+						className='text-white bg-[#5271ff] rounded px-4 py-2 h-fit'
+						onClick={() => setIsReferOpened(true)}
+					>
+						Refer
+					</button>
+				</div>
 				<div className='grid grid-cols-3'>
 					{buttonDatas.map((buttonData, index) => (
 						<Buttons
@@ -37,7 +49,32 @@ const Me = () => {
 					))}
 				</div>
 			</div>
+			{isReferOpened && (
+				<RWebShare
+					data={{
+						text: 'Web Share - GfG',
+						url: 'http://localhost:3000',
+						title: 'GfG'
+					}}
+					onClick={() => console.log('shared successfully!')}
+				>
+					<button>Share on Web</button>
+				</RWebShare>
+			)}
 		</>
+	);
+};
+
+const ReferPopup = ({ setIsReferOpened }) => {
+	return (
+		<div
+			onClick={() => setIsReferOpened(false)}
+			className='w-screen h-screen  top-0 left-0 absolute z-50 bg-black opacity-50'
+		>
+			<div>
+				<h1>Web Share - GeeksforGeeks</h1>
+			</div>
+		</div>
 	);
 };
 
@@ -65,7 +102,10 @@ const handleMeNav = (text, dispatch, navigate, link) => {
 		case 'About us':
 			navigate(link);
 			break;
-		case 'Buy Apex':
+		case 'Deposite':
+			navigate(link);
+			break;
+		case 'Referral':
 			navigate(link);
 			break;
 
@@ -89,7 +129,7 @@ const Buttons = ({ img, text, dispatch, navigate, link }) => {
 const buttonDatas = [
 	{
 		img: LOGO,
-		text: 'Buy Apex',
+		text: 'Deposite',
 		link: '/deposit'
 	},
 	// {
@@ -137,6 +177,11 @@ const buttonDatas = [
 		text: 'About us',
 		link: 'https://t.me/+5eEEx9yt2lAxMmU1'
 	},
+	// {
+	// 	img: 'https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-network-business-and-management-kiranshastry-gradient-kiranshastry.png',
+	// 	text: 'Referral',
+	// 	link: '/referral'
+	// },
 	{
 		img: 'https://img.icons8.com/external-regular-kawalan-studio/96/5271ff/external-logout-user-interface-regular-kawalan-studio.png',
 		text: 'Logout'

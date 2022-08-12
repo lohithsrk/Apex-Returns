@@ -87,7 +87,7 @@ const Deposit = () => {
 							alt='Apex'
 							className='w-5 h-5 mr-1'
 						/>
-						<p>Custom</p>
+						<p>Amount</p>
 					</div>
 				</div>
 				{selectedApex === 'custom' && (
@@ -108,14 +108,14 @@ const Deposit = () => {
 					</div>
 				)}
 				<div className='flex flex-1 justify-between mx-3 text-sm '>
-					<p>deposit Amount:</p>
+					<p>Deposit amount:</p>
 					<p>₹{selectedApex}</p>
 				</div>
 				<div
 					className='p-2 bg-gradient-to-l from-cyan-500 to-[#5271ff] m-3 rounded-lg text-white text-center'
 					onClick={() => handleAddApexClick(selectedApex)}
 				>
-					Add Apex
+					Deposite
 				</div>
 				<p className='underline text-center text-xs text-[#5271ff]'>Get help</p>
 			</div>
