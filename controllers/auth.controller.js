@@ -7,7 +7,7 @@ exports.loginGet = (req, res) => {
     const token = req.headers['x-access-token'];
 
     if (token) {
-        jwt.verify(token, process.env.SECRET, (err, decoded) => {
+        jwt.verify(token, process.env.SECRET, async (err, decoded) => {
             if (err)
                 return res.status(401).json({
                     isLoggedIn: false,
@@ -16,7 +16,7 @@ exports.loginGet = (req, res) => {
             req.user = decoded;
             res.json({
                 isLoggedIn: true,
-                user: decoded
+                user: { ...decoded }
             })
         });
     } else {
@@ -28,7 +28,7 @@ exports.loginGet = (req, res) => {
 
 exports.loginPost = async (req, res) => {
     const { phone_number, password } = req.body;
-    await db.query('SELECT * FROM user WHERE phone_number = ?', [phone_number], (err, results) => {
+    await db.query('SELECT * FROM user WHERE phone_number = ?', [phone_number], async (err, results) => {
         if (err) {
             console.log(err);
             return res.status(500).json({
@@ -64,11 +64,47 @@ exports.loginPost = async (req, res) => {
             expiresIn: 3000
         });
 
-        return res.json({
-            isLoggedIn: true,
-            token: token,
-            user: user
-        });
+        await db.query('SELECT apex_plans.* FROM investments, apex_plans WHERE user_id = ? AND investments.investment_id = apex_plans.id', [results[0].id], (err, results1) => {
+            if (err) {
+                return res.status(500).json({
+                    error: err
+                });
+            }
+
+            const allInvestments = results1;
+            let currentDailyReturns = 0;
+            let amountObtainedAlready = 0;
+
+            allInvestments.forEach(async investment => {
+                const currentDate = new Date(investment.created_at);
+                let endDate = new Date(currentDate)
+                endDate.setDate(endDate.getDate() + investment.return_period);
+                const now = new Date()
+
+                if (now > endDate) {
+                    await db.query('DELETE FROM investments WHERE investment.investment_id = ? AND user_id = ?'), [investment.id, results[0].id], (err, results) => {
+                        if (err) {
+                            console.log(err);
+                            return res.status(500).json({
+                                error: err
+                            });
+                        }
+                    }
+                } else {
+                    let dateDifference = now - currentDate;
+                    const days = dateDifference / (1000 * 60 * 60 * 24)
+                    currentDailyReturns += investment.deposit_amount * investment.daily_returns / 100;
+                    amountObtainedAlready += investment.deposit_amount * (investment.daily_returns / 100) * days;
+                }
+            });
+            console.log(currentDailyReturns);
+            return res.json({
+                isLoggedIn: true,
+                token: token,
+                user: { ...user, currentDailyReturns, amountObtainedAlready }
+            });
+        })
+
     })
 }
 
@@ -85,7 +121,7 @@ exports.signupPost = async (req, res) => {
         const hash = bcrypt.hashSync(password, salt);
 
         await db.query('SELECT * FROM user WHERE id = ?', [referalID], async (err, results1) => {
-        
+
             if (err) {
                 console.log(err);
                 return res.status(500).json({
