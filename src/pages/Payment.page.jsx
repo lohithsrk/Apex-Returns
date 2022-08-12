@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { createDeposite } from '../axios/payment.axios';
+import { createdeposit } from '../axios/payment.axios';
 
 const Payment = () => {
 	const [copyText, setCopyText] = useState('');
@@ -22,7 +22,7 @@ const Payment = () => {
 	};
 
 	const handleSubmit = async (e) => {
-		await createDeposite(user.user.id, amount, referenceID).then((res) => {
+		await createdeposit(user.user.id, amount, referenceID).then((res) => {
 			if (res.data.message === 'Success') {
 				toast.success(
 					'Payment successful. Your APEX will be added to your account soon.'

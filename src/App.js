@@ -4,8 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Home from './pages/Home.page';
 import Orders from './pages/Orders.page';
-import Deposite from './pages/Deposite.page';
-// import Plans from './pages/Plans.page';
+import Deposit from './pages/Deposit.page';
+import Plans from './pages/Plans.page';
 import Me from './pages/Me.page';
 import Auth from './pages/Auth.page';
 import Payment from './pages/Payment.page';
@@ -36,16 +36,16 @@ const App = () => {
           <Route path="orders" element={<Orders />} />
         </Route>
         <Route path="/" element={<UserRoute />} >
-          <Route path="deposite" element={<Deposite />} />
+          <Route path="deposit" element={<Deposit />} />
         </Route>
-        {/* <Route path="/" element={<UserRoute />} > */}
-        {/* <Route path="plans" element={<Plans />} /> */}
-        {/* </Route> */}
+        <Route path="/" element={<UserRoute />} >
+          <Route path="plans" element={<Plans />} />
+        </Route>
         <Route path="/" element={<UserRoute />} >
           <Route path="me" exact element={<Me />} />
         </Route>
         <Route path="/" element={<UserRoute />} >
-          <Route path="/deposite/apex/payment" element={<Payment />} />
+          <Route path="/deposit/apex/payment" element={<Payment />} />
         </Route>
         <Route path="/" element={<UserRoute />} >
           <Route path="/withdraw" element={<Withdraw />} />

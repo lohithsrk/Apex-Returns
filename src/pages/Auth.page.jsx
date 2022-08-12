@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
 
-import LOGO from '../assets/logo.png';
+import LOGO from '../assets/logo_full_white.png';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -112,7 +112,7 @@ const Auth = () => {
 			</Helmet>
 			<div className='flex flex-1 flex-col h-screen items-center bg-gradient-to-br from-cyan-500 to-[#5271ff] pt-32'>
 				<div className='-translate-y-10 flex flex-col items-center'>
-					<img src={LOGO} alt='APEX RETURNS' className='w-24' />
+					<img src={LOGO} alt='APEX RETURNS' className='w-48 drop-shadow-lg' />
 					<div className='flex justify-between p-1 items-center bg-gray-600 bg-opacity-40 rounded-full relative my-6'>
 						<div
 							className={`bg-white w-1/2 h-8 rounded-full absolute ${
@@ -121,7 +121,7 @@ const Auth = () => {
 						></div>
 						<h3
 							className={`text-center w-28 py-1 ${
-								authPage === '/signup' ? 'text-white z-0' : 'text-black z-10'
+								authPage === '/signup' ? 'text-white z-0' : 'text-[#5271ff] z-10'
 							}`}
 							onClick={() => {
 								setAuthPage('/login');
@@ -134,7 +134,7 @@ const Auth = () => {
 						</h3>
 						<h3
 							className={`text-center w-28 py-1 ${
-								authPage === '/signup' ? 'text-black z-10' : 'text-white z-0'
+								authPage === '/signup' ? 'text-[#5271ff] z-10' : 'text-white z-0'
 							}`}
 							onClick={() => {
 								setAuthPage('/signup');
@@ -174,9 +174,9 @@ const Auth = () => {
 							</button>
 						</div>
 					</form>
-					<Link className='text-white mt-10' to='/forget-password'>
+					{/* <Link className='text-white mt-10' to='/forget-password'>
 						Forgot Password?
-					</Link>
+					</Link> */}
 				</div>
 			</div>
 		</>

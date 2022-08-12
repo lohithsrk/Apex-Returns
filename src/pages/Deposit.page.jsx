@@ -6,8 +6,9 @@ import { Helmet } from 'react-helmet';
 
 import LOGO_COLORED from '../assets/logo-colored.png';
 import LOGO from '../assets/logo.png';
+import LOGONav from '../assets/logo_full_white.png';
 
-const Deposite = () => {
+const Deposit = () => {
 	const [selectedApex, setSelectedApex] = useState(0);
 	const [customApex, setCustomApex] = useState('');
 
@@ -27,7 +28,7 @@ const Deposite = () => {
 		window.location = paymentLink;
 		const qr = 'https://upayi.ml/qr/' + UPI_ID + '/' + amount;
 
-		navigate('/deposite/apex/payment', {
+		navigate('/deposit/apex/payment', {
 			state: {
 				UPI_ID: UPI_ID,
 				amount: selectedApex,
@@ -44,15 +45,18 @@ const Deposite = () => {
 				<title>BUY APEX | APEX RETURNS</title>
 			</Helmet>
 			<div>
-				<div className='flex justify-end items-center text-xs text-center h-16'>
-					<div className='p-2'>
-						<p>Apex</p>
-						<p>{user.user.total_apex > 0 ? user.user.total_apex : '0.00'}</p>
-					</div>
-					<span className='w-[2px] block h-4 bg-gray-600' />
-					<div className='p-2'>
-						<p>Balance</p>
-						<p>₹{user.user.amount > 0 ? user.user.amount : '0.00'}</p>
+				<div className='flex justify-between items-center text-xs text-center h-16 bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white border-b-2 border-white'>
+					<img src={LOGONav} alt='APEX RETURNS' className='w-36 ml-2' />
+					<div className='flex justify-center items-center'>
+						<div className='p-2'>
+							<p>Apex</p>
+							<p>{user.user.total_apex > 0 ? user.user.total_apex : '0.00'}</p>
+						</div>
+						<span className='w-[2px] block h-4 bg-gray-600' />
+						<div className='p-2'>
+							<p>Balance</p>
+							<p>₹{user.user.amount > 0 ? user.user.amount : '0.00'}</p>
+						</div>
 					</div>
 				</div>
 				<div className='bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white text-xs p-3'>
@@ -104,7 +108,7 @@ const Deposite = () => {
 					</div>
 				)}
 				<div className='flex flex-1 justify-between mx-3 text-sm '>
-					<p>Deposite Amount:</p>
+					<p>deposit Amount:</p>
 					<p>₹{selectedApex}</p>
 				</div>
 				<div
@@ -138,4 +142,4 @@ const ApexsAmount = ({ apex, setSelectedApex, selected }) => {
 };
 
 const data = [500, 1000, 3000, 5000, 10000, 20000, 50000, 200000];
-export default Deposite;
+export default Deposit;

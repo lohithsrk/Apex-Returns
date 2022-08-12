@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 
 import { ordersGet } from '../axios/orders.route';
 
-import LOGO from '../assets/logo-colored.png';
+import LOGO from '../assets/logo_full_white.png';
 
 const Orders = () => {
 	const [status, setStatus] = useState('pending');
@@ -28,8 +28,8 @@ const Orders = () => {
 				<title>ORDERS | APEX RETURNS</title>
 			</Helmet>
 			<div>
-				<div className='flex justify-between items-center text-xs text-center h-16 shadow-lg'>
-					<img src={LOGO} alt='APEX RETURNS' className='w-16 ml-2' />
+				<div className='flex justify-between items-center text-xs text-center h-16 shadow-lg bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white border-b-2 border-white'>
+					<img src={LOGO} alt='APEX RETURNS' className='w-36 ml-2' />
 					<div className='flex justify-center items-center'>
 						<div className='p-2'>
 							<p>
@@ -58,7 +58,7 @@ const Orders = () => {
 						</li>
 						<li>
 							All investment plans are only activated by tickets.&nbsp;
-							<Link to='/deposite' className='font-semibold underline'>
+							<Link to='/deposit' className='font-semibold underline'>
 								Please click here to buy Apex if needed.
 							</Link>
 						</li>
@@ -95,9 +95,7 @@ const Orders = () => {
 									<div>
 										<span className='text-xs font-semibold'>Date</span>
 										<br />
-										{
-											new Date(order.created_at).toLocaleString().split(',')[0]
-										}
+										{new Date(order.created_at).toLocaleString().split(',')[0]}
 										<br />
 										{new Date(order.created_at).toLocaleString().split(',')[1]}
 									</div>

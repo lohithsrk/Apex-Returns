@@ -3,11 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import Helmet from 'react-helmet';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+
+import 'swiper/css/bundle';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import './styles.css';
 
 import { getApexPlans } from '../axios/apexPlans.axios';
 import { investmentPost } from '../axios/investments.axios';
 
-import LOGO from '../assets/logo.png';
+import LOGO from '../assets/logo_full_white.png';
+import Slide1 from '../assets/slide1.svg';
+import Slide2 from '../assets/slide2.svg';
+import Slide3 from '../assets/slide3.svg';
+import Slide4 from '../assets/slide4.svg';
+import CheckListArrow from '../assets/CheckListArrow.svg';
 
 const Home = () => {
 	const user = useSelector((state) => state.user);
@@ -31,7 +43,7 @@ const Home = () => {
 				<title>HOME | APEX RETURNS</title>
 			</Helmet>
 			<div className='flex justify-between items-center text-xs text-center h-16 bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'>
-				<img src={LOGO} alt='APEX RETURNS' className='w-14 ml-2' />
+				<img src={LOGO} alt='APEX RETURNS' className='w-36 ml-2' />
 				<div className='flex items-center justify-center'>
 					<div className='p-2'>
 						<p>Apex</p>
@@ -44,7 +56,233 @@ const Home = () => {
 					</div>
 				</div>
 			</div>
-			<div className='flex flex-1 w-screen h-screen pb-20'>
+			<div className='pb-20'>
+				<div className='flex flex-col flex-1 items-center w-screen'>
+					<Swiper
+						slidesPerView={1}
+						centeredSlides={true}
+						spaceBetween={30}
+						grabCursor={true}
+						className='mySwiper bg-transparent'
+						pagination={{
+							clickable: true
+						}}
+						modules={[Pagination]}
+					>
+						<SwiperSlide>
+							<div className='px-6 pb-3 pt-16 mt-3 shadow-lg w-72 text-left rounded-lg relative'>
+								<img
+									src={Slide1}
+									alt='Slide 1'
+									className='w-28 absolute top-0 -translate-y-1/2'
+								/>
+								<h1 className='font-medium text-xl'>Leases</h1>
+								<ul>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Asset Backed
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Corporate Credit
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Monthly Returns, 24-36 Months Tenure
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Invest from ₹ 10,000
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Up to 21% Pre-Tax IRR
+									</li>
+								</ul>
+							</div>
+						</SwiperSlide>
+						<SwiperSlide>
+							<div className='px-6 pb-3 pt-16 mt-3 shadow-lg w-72 text-left rounded-lg relative'>
+								<img
+									src={Slide2}
+									alt='Slide 1'
+									className='w-28 absolute top-0 -translate-y-1/2'
+								/>
+								<h1 className='font-medium text-xl'>Inventory</h1>
+								<ul>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Asset Backed
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Corporate Credit
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										1-13 Months Tenure
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Invest from ₹ 10,000
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Up to 12% Pre-Tax Yield
+									</li>
+								</ul>
+							</div>
+						</SwiperSlide>
+						<SwiperSlide>
+							<div className='px-6 pb-3 pt-16 mt-3 shadow-lg w-72 text-left rounded-lg relative '>
+								<img
+									src={Slide3}
+									alt='Slide 3'
+									className='w-28 absolute top-0 -translate-y-1/2'
+								/>
+								<h1 className='font-medium text-xl'>Commercial Real-Estate</h1>
+								<ul>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Asset Backed
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										MNC Tenants
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Quaterly Rentals
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Invest from ₹ 10,000
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Up to 11% Yield
+									</li>
+								</ul>
+							</div>
+						</SwiperSlide>
+						<SwiperSlide>
+							<div className='px-6 pb-3 pt-16 mt-3 shadow-lg w-72 text-left rounded-lg relative'>
+								<img
+									src={Slide4}
+									alt='Slide 4'
+									className='w-28 absolute top-0 -translate-y-1/2'
+								/>
+								<h1 className='font-medium text-xl'>Start-up Equity</h1>
+								<ul>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										High-Growth, Early-Stage companies
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Participate along side VCs
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Long Term Investment Horizon
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										Invest from ₹ 2,00,000
+									</li>
+									<li className='items-center flex my-2 text-base'>
+										<img
+											src={CheckListArrow}
+											className='mr-4 w-4'
+											alt='Check'
+										/>
+										High risk-high-reward
+									</li>
+								</ul>
+							</div>
+						</SwiperSlide>
+					</Swiper>
+				</div>
+
+				<h1 className='text-xl font-semibold text-center mt-5'>
+					Plans you can invest
+				</h1>
 				<div className='flex flex-col items-center w-screen'>
 					{apexPlans.map((plan, index) => {
 						return (
@@ -129,7 +367,7 @@ const InvestConfirm = ({
 }) => {
 	const handleInvest = async (investment_id, user_id, amount) => {
 		if (user.user.total_apex < amount) {
-			navigate('/deposite');
+			navigate('/deposit');
 			return toast.error(
 				'You do not have enough Apex to invest. Buy some here.'
 			);
@@ -166,7 +404,7 @@ const InvestConfirm = ({
 					{'basic'} plan
 				</p>
 				<div className='flex justify-between pb-2'>
-					<span>Deposite amount</span>
+					<span>deposit amount</span>
 					<span>{choosenPlan.deposit_amount}</span>
 				</div>
 				<div className='flex justify-between pb-2'>

@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 
 import LOGO from '../assets/logo-colored.png';
-import LOGO_FULL from '../assets/logo_full.png';
+import LOGO_FULL from '../assets/logo_full_white.png';
 
 const Me = () => {
 	const dispatch = useDispatch();
@@ -18,8 +18,8 @@ const Me = () => {
 				<title>ME | APEX RETURNS</title>
 			</Helmet>
 			<div>
-				<div className='w-screen bg-gray-600 p-2 h-16'>
-					<img src={LOGO_FULL} alt='APEX RETURNS' className='h-full' />
+				<div className='w-screen bg-gray-600 p-2 h-16 bg-gradient-to-l from-cyan-500 to-[#5271ff] border-b-2 border-white'>
+					<img src={LOGO_FULL} alt='APEX RETURNS' className='w-36' />
 				</div>
 				<div className='bg-gradient-to-l from-cyan-500 to-[#5271ff] flex justify-end px-2 py-1'>
 					<p className='inline text-white text-sm'>My ID: {user.user.id}</p>
@@ -32,6 +32,7 @@ const Me = () => {
 							text={buttonData.text}
 							dispatch={dispatch}
 							navigate={navigate}
+							link={buttonData.link ? buttonData.link : null}
 						/>
 					))}
 				</div>
@@ -40,7 +41,7 @@ const Me = () => {
 	);
 };
 
-const handleMeNav = (text, dispatch, navigate) => {
+const handleMeNav = (text, dispatch, navigate, link) => {
 	switch (text) {
 		case 'Logout':
 			toast.success('Logged out');
@@ -50,10 +51,22 @@ const handleMeNav = (text, dispatch, navigate) => {
 			});
 			break;
 		case 'Orders':
-			navigate('/orders');
+			navigate(link);
 			break;
 		case 'Withdraw':
-			navigate('/withdraw');
+			navigate(link);
+			break;
+		case 'Team':
+			navigate(link);
+			break;
+		case 'Customer Support':
+			navigate(link);
+			break;
+		case 'About us':
+			navigate(link);
+			break;
+		case 'Buy Apex':
+			navigate(link);
 			break;
 
 		default:
@@ -61,11 +74,11 @@ const handleMeNav = (text, dispatch, navigate) => {
 	}
 };
 
-const Buttons = ({ img, text, dispatch, navigate }) => {
+const Buttons = ({ img, text, dispatch, navigate, link }) => {
 	return (
 		<div
 			className='flex items-center flex-col text-center m-2'
-			onClick={() => handleMeNav(text, dispatch, navigate)}
+			onClick={() => handleMeNav(text, dispatch, navigate, link)}
 		>
 			<img className='w-12' src={img} alt={text} />
 			<p className='w-20 text-sm text-center'>{text}</p>
@@ -110,12 +123,19 @@ const buttonDatas = [
 		link: '/orders'
 	},
 	{
+		img: 'https://img.icons8.com/material-rounded/48/5271ff/paid-bill.png',
+		text: 'Team',
+		link: '/team'
+	},
+	{
 		img: 'https://img.icons8.com/fluency/96/000000/chat-message.png',
-		text: 'Customer support'
+		text: 'Customer support',
+		link: 'https://t.me/+5eEEx9yt2lAxMmU1'
 	},
 	{
 		img: 'https://img.icons8.com/fluency/96/000000/about.png',
-		text: 'About us'
+		text: 'About us',
+		link: 'https://t.me/+5eEEx9yt2lAxMmU1'
 	},
 	{
 		img: 'https://img.icons8.com/external-regular-kawalan-studio/96/5271ff/external-logout-user-interface-regular-kawalan-studio.png',

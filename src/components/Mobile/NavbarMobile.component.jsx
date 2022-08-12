@@ -14,7 +14,7 @@ const NavbarMobile = () => {
 				? 0
 				: location.pathname === '/orders'
 				? 1
-				: location.pathname === '/deposite'
+				: location.pathname === '/deposit'
 				? 2
 				: location.pathname === '/plans'
 				? 3
@@ -103,8 +103,8 @@ const navItems = [
 		fillIcon: 'https://img.icons8.com/material-rounded/48/ffffff/paid-bill.png'
 	},
 	{
-		name: 'Deposite',
-		link: '/deposite',
+		name: 'deposit',
+		link: '/deposit',
 		outlineIcon:
 			'https://img.icons8.com/fluency-systems-regular/48/9e9e9e/quick-mode-on.png',
 		fillIcon:
@@ -113,10 +113,8 @@ const navItems = [
 	{
 		name: 'Plans',
 		link: '/plans',
-		outlineIcon:
-			'https://img.icons8.com/ios-glyphs/60/9e9e9e/money--v1.png',
-		fillIcon:
-			'https://img.icons8.com/ios-glyphs/60/ffffff/money--v1.png'
+		outlineIcon: 'https://img.icons8.com/ios-glyphs/60/9e9e9e/money--v1.png',
+		fillIcon: 'https://img.icons8.com/ios-glyphs/60/ffffff/money--v1.png'
 	},
 	{
 		name: 'Me',

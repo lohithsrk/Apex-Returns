@@ -13,10 +13,10 @@ const Withdraw = () => {
 	const [upiInput, setUpiInput] = useState('');
 
 	const handleWithdraw = () => {
-		const minWithdrawAmount = 100;
+		const minWithdrawAmount = 250;
 
 		if (amount < minWithdrawAmount) {
-			return toast.error('Minimum withdraw amount is 100');
+			return toast.error('Minimum withdraw amount is 250');
 		} else if (amount > user.user.amount) {
 			return toast.error('Not enough balance');
 		} else {
@@ -79,6 +79,7 @@ const Withdraw = () => {
 							value={upiInput}
 							onChange={(e) => setUpiInput(e.target.value)}
 						/>
+						<p className='text-white text-xs'>Our APEX requires 8% tax</p>
 						<div
 							className='bg-white shadow font-semibold text-[#5271ff] p-2 px-3 rounded mt-3'
 							onClick={handleWithdraw}
