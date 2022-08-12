@@ -10,7 +10,7 @@ import Me from './pages/Me.page';
 import Auth from './pages/Auth.page';
 import Payment from './pages/Payment.page';
 import Withdraw from './pages/Withdraw.page';
-// import Referral from './pages/Referral.page';
+import About from './pages/About.page';
 
 import UserRoute from './routes/User.route';
 
@@ -50,6 +50,9 @@ const App = () => {
         </Route>
         <Route path="/" element={<UserRoute />} >
           <Route path="/withdraw" element={<Withdraw />} />
+        </Route>
+        <Route path="/" element={<UserRoute />} >
+          <Route path="/about" element={<About />} />
         </Route>
         {/* <Route path="/" element={<UserRoute />} >
           <Route path="/referral" element={<Referral />} />

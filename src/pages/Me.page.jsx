@@ -74,7 +74,7 @@ const handleMeNav = (text, dispatch, navigate, link) => {
 			navigate(link);
 			break;
 		case 'Customer Support':
-			navigate(link);
+			window.open(link);
 			break;
 		case 'About us':
 			navigate(link);
@@ -146,13 +146,13 @@ const buttonDatas = [
 	},
 	{
 		img: 'https://img.icons8.com/fluency/96/000000/chat-message.png',
-		text: 'Customer support',
+		text: 'Customer Support',
 		link: 'https://t.me/+5eEEx9yt2lAxMmU1'
 	},
 	{
 		img: 'https://img.icons8.com/fluency/96/000000/about.png',
 		text: 'About us',
-		link: 'https://t.me/+5eEEx9yt2lAxMmU1'
+		link: '/about'
 	},
 	// {
 	// 	img: 'https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-network-business-and-management-kiranshastry-gradient-kiranshastry.png',

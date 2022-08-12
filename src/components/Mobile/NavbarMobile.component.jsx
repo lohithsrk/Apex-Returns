@@ -20,7 +20,7 @@ const NavbarMobile = () => {
 				? 3
 				: location.pathname === '/me'
 				? 4
-				: 0
+				: 50
 	});
 	const circlePosition = Math.round(window.innerWidth / 50 / 10) * 10;
 

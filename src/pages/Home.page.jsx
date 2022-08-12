@@ -108,7 +108,7 @@ const Home = () => {
 											className='mr-4 w-4'
 											alt='Check'
 										/>
-										Invest from ₹ 10,000
+										Invest from ₹ 500
 									</li>
 									<li className='items-center flex my-2 text-base'>
 										<img
@@ -116,7 +116,7 @@ const Home = () => {
 											className='mr-4 w-4'
 											alt='Check'
 										/>
-										Up to 21% Pre-Tax IRR
+										Up to 10% Yield
 									</li>
 								</ul>
 							</div>
@@ -160,7 +160,7 @@ const Home = () => {
 											className='mr-4 w-4'
 											alt='Check'
 										/>
-										Invest from ₹ 10,000
+										Invest from ₹ 500
 									</li>
 									<li className='items-center flex my-2 text-base'>
 										<img
@@ -168,7 +168,7 @@ const Home = () => {
 											className='mr-4 w-4'
 											alt='Check'
 										/>
-										Up to 12% Pre-Tax Yield
+										Up to 10% Yield
 									</li>
 								</ul>
 							</div>
@@ -212,7 +212,7 @@ const Home = () => {
 											className='mr-4 w-4'
 											alt='Check'
 										/>
-										Invest from ₹ 10,000
+										Invest from ₹ 500
 									</li>
 									<li className='items-center flex my-2 text-base'>
 										<img
@@ -220,7 +220,7 @@ const Home = () => {
 											className='mr-4 w-4'
 											alt='Check'
 										/>
-										Up to 11% Yield
+										Up to 10% Yield
 									</li>
 								</ul>
 							</div>
@@ -264,7 +264,7 @@ const Home = () => {
 											className='mr-4 w-4'
 											alt='Check'
 										/>
-										Invest from ₹ 2,00,000
+										Invest from ₹ 500
 									</li>
 									<li className='items-center flex my-2 text-base'>
 										<img
@@ -290,6 +290,7 @@ const Home = () => {
 							// to get a value that is either negative, positive, or zero.
 							return new Date(b.created_at) - new Date(a.created_at);
 						})
+						.reverse()
 						.map((plan, index) => {
 							return (
 								<div
@@ -388,7 +389,7 @@ const InvestConfirm = ({
 	};
 	return (
 		<div
-			className='absolute w-screen h-screen top-0 left-0 bg-black bg-opacity-60 z-50 flex justify-center items-center'
+			className='fixed w-screen h-screen top-0 left-0 bg-black bg-opacity-60 z-50 flex justify-center items-center'
 			onClick={() => {
 				setIsConfirmOpened(false);
 				setChoosenPlan({});
@@ -397,7 +398,7 @@ const InvestConfirm = ({
 			<div className='bg-white p-5 w-64 rounded-lg shadow-md shadow-slate-500'>
 				<h2 className='font-semibold text-xl text-center pb-2'>Apex Returns</h2>
 				<p className='text-lg font-medium text-[#5271ff] pb-2'>
-					{'basic'} plan
+					{choosenPlan.name}
 				</p>
 				<div className='flex justify-between pb-2'>
 					<span>deposit amount</span>

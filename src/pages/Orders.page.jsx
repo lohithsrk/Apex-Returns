@@ -35,14 +35,14 @@ const Orders = () => {
 							<p>
 								Obtained <br /> Already
 							</p>
-							<p>₹0.00</p>
+							<p>₹{Math.floor(user.user.amountObtainedAlready)}</p>
 						</div>
 						<span className='w-[2px] block h-4 bg-gray-600' />
 						<div className='p-2'>
 							<p>
 								Current <br /> Daily Returns
 							</p>
-							<p>₹0.00</p>
+							<p>₹{user.user.currentDailyReturns}</p>
 						</div>
 					</div>
 				</div>

@@ -19,8 +19,8 @@ const Deposit = () => {
 	const UPI_ID = 'srklohith05@apl';
 
 	const handleAddApexClick = (amount) => {
-		if (selectedApex === 0) {
-			return toast.error('Please select an apex');
+		if (selectedApex < 500) {
+			return toast.error('Please select an apex of 500 or more');
 		}
 
 		const paymentLink = `upi://pay?pn=UPAYI&pa=${UPI_ID}&cu=INR&am=${amount}/`;
@@ -72,10 +72,11 @@ const Deposit = () => {
 								apex={apex}
 								selected={apex === selectedApex}
 								setSelectedApex={setSelectedApex}
+								setCustomApex={setCustomApex}
 							/>
 						);
 					})}
-					<div
+					{/* <div
 						className={`flex flex-row items-center justify-start p-3 m-2 shadow-lg rounded-md cursor-pointer ${
 							selectedApex === 'custom' &&
 							'bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'
@@ -88,28 +89,27 @@ const Deposit = () => {
 							className='w-5 h-5 mr-1'
 						/>
 						<p>Amount</p>
-					</div>
+					</div> */}
 				</div>
-				{selectedApex === 'custom' && (
-					<div className='flex flex-1 justify-between mx-3 text-sm mb-3'>
-						<p>Enter Apex:</p>
-						<input
-							type='text'
-							className='border-b-2 border-[#5271ff] w-14 outline-none text-right'
-							placeholder='00000'
-							value={customApex}
-							onInput={(e) => {
-								setCustomApex(e.target.value.replace(/[^0-9]/g, ''));
-							}}
-							onPaste={() => false}
-							maxLength={7}
-							minLength={3}
-						/>
-					</div>
-				)}
+				<div className='flex flex-1 justify-between mx-3 text-sm mb-3'>
+					<p>Enter Apex:</p>
+					<input
+						type='text'
+						className='border-b-2 border-[#5271ff] w-14 outline-none text-right'
+						placeholder='00000'
+						value={customApex}
+						onInput={(e) => {
+							setCustomApex(e.target.value.replace(/[^0-9]/g, ''));
+							setSelectedApex(e.target.value.replace(/[^0-9]/g, ''));
+						}}
+						onPaste={() => false}
+						maxLength={7}
+						minLength={3}
+					/>
+				</div>
 				<div className='flex flex-1 justify-between mx-3 text-sm '>
 					<p>Deposit amount:</p>
-					<p>₹{selectedApex}</p>
+					<p>₹{customApex ? customApex : 0}</p>
 				</div>
 				<div
 					className='p-2 bg-gradient-to-l from-cyan-500 to-[#5271ff] m-3 rounded-lg text-white text-center'
@@ -117,19 +117,22 @@ const Deposit = () => {
 				>
 					Deposite
 				</div>
-				<p className='underline text-center text-xs text-[#5271ff]'>Get help</p>
+				{/* <p className='underline text-center text-xs text-[#5271ff]'>Get help</p> */}
 			</div>
 		</>
 	);
 };
 
-const ApexsAmount = ({ apex, setSelectedApex, selected }) => {
+const ApexsAmount = ({ apex, setSelectedApex, setCustomApex, selected }) => {
 	return (
 		<div
 			className={`flex flex-row items-center justify-start p-3 m-2 shadow-lg rounded-md cursor-pointer ${
 				selected && 'bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'
 			}`}
-			onClick={() => setSelectedApex(apex)}
+			onClick={() => {
+				setSelectedApex(apex);
+				setCustomApex(apex);
+			}}
 		>
 			<img
 				src={selected ? LOGO : LOGO_COLORED}
