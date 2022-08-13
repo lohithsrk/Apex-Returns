@@ -24,19 +24,19 @@ exports.investmentPost = async (req, res) => {
         } else {
 
             if (req.body.investment_id) {
-                await db.query('SELECT * FROM reference WHERE id = ?', [req.body.investment_id], async (err, result1) => {
+                await db.query('SELECT * FROM reference WHERE id = ?', [req.body.reference_id], async (err, result1) => {
                     if (err) {
                         console.log(err);
                         return res.status(500).json(err);
                     }
                     if (result1[0] && (result1.length >= 0 && result1[0].isFirstTransactionMade == 0)) {
-                        await db.query('UPDATE reference SET isFirstTransactionMade = 1 WHERE id = ?', [req.body.investment_id], async (err, result2) => {
+                        await db.query('UPDATE reference SET isFirstTransactionMade = 1 WHERE id = ?', [req.body.reference_id], async (err, result2) => {
                             if (err) {
                                 console.log(err);
                                 return res.status(500).json(err);
                             }
 
-                            await db.query('UPDATE user SET total_apex = total_apex + ? WHERE id = ?', [50, result1[0].referred_by], async (err, result3) => {
+                            await db.query('UPDATE user SET amount = amount + ? WHERE id = ?', [50, result1[0].referred_by], async (err, result3) => {
                             })
                         })
                     }
