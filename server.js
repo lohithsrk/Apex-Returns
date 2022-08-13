@@ -18,6 +18,7 @@ const plansRoute = require('./routes/plans.route');
 const investmentRoute = require('./routes/investments.route');
 const withdrawRoute = require('./routes/withdraw.route');
 const referenceRoute = require('./routes/reference.route');
+const adminRoute = require('./routes/admin.route');
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
@@ -49,6 +50,7 @@ app.use(route, plansRoute)
 app.use(route, investmentRoute)
 app.use(route, withdrawRoute)
 app.use(route, referenceRoute)
+app.use(route, adminRoute)
 
 app.listen(process.env.PORT, () =>
     console.log(`Server is running on port ${process.env.PORT}`)

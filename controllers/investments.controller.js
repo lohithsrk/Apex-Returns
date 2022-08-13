@@ -36,7 +36,7 @@ exports.investmentPost = async (req, res) => {
                                 return res.status(500).json(err);
                             }
 
-                            await db.query('UPDATE user SET total_apex = total_apex + ? WHERE id = ?', [50, req.body.user_id], async (err, result3) => {
+                            await db.query('UPDATE user SET total_apex = total_apex + ? WHERE id = ?', [50, result1[0].referred_by], async (err, result3) => {
                             })
                         })
                     }
