@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 const NavbarMobile = () => {
 	const location = useLocation();
+
 	const [selected, setSelected] = useState({
 		name: location.pathname.split('/')[1]
 			? location.pathname.split('/')[1][0].toUpperCase() +
@@ -12,14 +13,10 @@ const NavbarMobile = () => {
 		index:
 			location.pathname === '/'
 				? 0
-				: location.pathname === '/orders'
+				: location.pathname === '/withdraw'
 				? 1
 				: location.pathname === '/deposit'
 				? 2
-				: location.pathname === '/plans'
-				? 3
-				: location.pathname === '/me'
-				? 4
 				: 50
 	});
 	const circlePosition = Math.round(window.innerWidth / 50 / 10) * 10;
@@ -27,9 +24,9 @@ const NavbarMobile = () => {
 	return (
 		<div className='fixed bg-white bottom-0 left-0 right-0 shadow-[0_-2px_5px_rgba(0,0,0,0.25)] py-2 z-50'>
 			<div
-				className={`rounded-full w-11 h-11 absolute -z-10  -translate-x-1/2 translate-y-3/4 bottom-[5.2rem] bg-gradient-to-l from-cyan-500 to-[#5271ff] drop-shadow-[0_-2px_5px_rgba(0,0,0,0.25)]`}
+				className={`rounded-full w-11 h-11 absolute -z-10 translate-y-3/4 bottom-[5.2rem] bg-gradient-to-l from-cyan-500 to-[#5271ff] drop-shadow-[0_-2px_5px_rgba(0,0,0,0.25)]`}
 				style={{
-					left: `${circlePosition + selected.index * 20}%`,
+					left: `${circlePosition + selected.index * 33.3}%`,
 					transition: 'left 0.2s ease-out'
 				}}
 			></div>
@@ -96,33 +93,19 @@ const navItems = [
 		fillIcon: 'https://img.icons8.com/fluency-systems-filled/48/ffffff/home.png'
 	},
 	{
-		name: 'Orders',
-		link: '/orders',
+		name: 'Withdraw',
+		link: '/withdraw',
 		outlineIcon:
 			'https://img.icons8.com/material-outlined/48/9e9e9e/paid-bill.png',
 		fillIcon: 'https://img.icons8.com/material-rounded/48/ffffff/paid-bill.png'
 	},
 	{
-		name: 'deposit',
+		name: 'Deposit',
 		link: '/deposit',
 		outlineIcon:
 			'https://img.icons8.com/fluency-systems-regular/48/9e9e9e/quick-mode-on.png',
 		fillIcon:
 			'https://img.icons8.com/ios-filled/50/ffffff/quick-mode-on--v1.png'
-	},
-	{
-		name: 'Plans',
-		link: '/plans',
-		outlineIcon: 'https://img.icons8.com/ios-glyphs/60/9e9e9e/money--v1.png',
-		fillIcon: 'https://img.icons8.com/ios-glyphs/60/ffffff/money--v1.png'
-	},
-	{
-		name: 'Me',
-		link: '/me',
-		outlineIcon:
-			'https://img.icons8.com/fluency-systems-regular/48/9e9e9e/guest-male.png',
-		fillIcon:
-			'https://img.icons8.com/fluency-systems-filled/48/ffffff/guest-male.png'
 	}
 ];
 
