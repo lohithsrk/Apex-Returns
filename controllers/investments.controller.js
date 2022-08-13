@@ -8,6 +8,7 @@ exports.investmentGet = async (req, res) => {
             console.log(err);
             return res.status(500).send(err);
         }
+        console.log(result);
         res.json(result);
     })
 }
