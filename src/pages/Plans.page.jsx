@@ -30,46 +30,63 @@ const Plans = () => {
 							<p>
 								Obtained <br /> Already
 							</p>
-							<p>₹{Math.floor(user.user.amountObtainedAlready)}</p>
+							<p>
+								₹
+								{user.user.amountObtainedAlready
+									? Math.floor(user.user.amountObtainedAlready)
+									: 0}
+							</p>
 						</div>
 						<span className='w-[2px] block h-4 bg-gray-600' />
 						<div className='p-2'>
 							<p>
 								Current <br /> Daily Returns
 							</p>
-							<p>₹{user.user.currentDailyReturns}</p>
+							<p>
+								₹
+								{user.user.currentDailyReturns
+									? user.user.currentDailyReturns
+									: 0}
+							</p>
 						</div>
 					</div>
 				</div>
-				<div className='flex flex-col items-center pb-10'>
+				<div className='flex flex-col items-center pb-20'>
 					{apexPlans.length > 0 ? (
-						apexPlans.map((plan, index) => {
-							return (
-								<>
-									<div className='bg-white p-5 w-64 rounded-lg shadow-md shadow-slate-500 mt-10 bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'>
-										<h2 className='font-semibold text-xl text-center pb-2'>
-											{plan.name} plan
-										</h2>
-										<div className='flex justify-between pb-2'>
-											<span>deposit amount</span>
-											<span>{plan.deposit_amount}</span>
+						apexPlans
+							.sort(function (a, b) {
+								// Turn your strings into dates, and then subtract them
+								// to get a value that is either negative, positive, or zero.
+								return new Date(b.created_at) - new Date(a.created_at);
+							})
+							.reverse()
+							.map((plan, index) => {
+								return (
+									<>
+										<div className='bg-white p-5 w-64 rounded-lg shadow-md shadow-slate-500 mt-10 bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'>
+											<h2 className='font-semibold text-xl text-center pb-2'>
+												{plan.name}
+											</h2>
+											<div className='flex justify-between pb-2'>
+												<span>deposit amount</span>
+												<span>₹{plan.deposit_amount}</span>
+											</div>
+											<div className='flex justify-between pb-2'>
+												<span>Daily returns</span>
+												<span>{plan.daily_returns}%</span>
+											</div>
+											<div className='flex justify-between pb-2'>
+												<span>Return period</span>
+												<span>{plan.return_period} Days</span>
+											</div>
+											<div className='flex justify-between pb-2'>
+												<span>Total returns</span>
+												<span>₹{plan.total_return}</span>
+											</div>
 										</div>
-										<div className='flex justify-between pb-2'>
-											<span>Daily returns</span>
-											<span>{plan.daily_returns}</span>
-										</div>
-										<div className='flex justify-between pb-2'>
-											<span>Return period</span>
-											<span>{plan.return_period}</span>
-										</div>
-										<div className='flex justify-between pb-2'>
-											<span>Total returns</span>
-											<span>{plan.total_return}</span>
-										</div>
-									</div>
-								</>
-							);
-						})
+									</>
+								);
+							})
 					) : (
 						<div className='flex justify-center items-center'>
 							<div className='p-2'>

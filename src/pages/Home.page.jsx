@@ -307,11 +307,11 @@ const Home = () => {
 										<div className='text-left'>
 											<div>
 												<p>Deposit Amount</p>
-												<p>{plan.deposit_amount}</p>
+												<p>₹{plan.deposit_amount}</p>
 											</div>
 											<div>
 												<p>Return Period</p>
-												<p>{plan.return_period}</p>
+												<p>{plan.return_period} Days</p>
 											</div>
 										</div>
 										<div className='text-right'>
@@ -321,7 +321,7 @@ const Home = () => {
 											</div>
 											<div>
 												<p>Total Returns</p>
-												<p>{plan.total_return}</p>
+												<p>₹{plan.total_return}</p>
 											</div>
 										</div>
 									</div>
@@ -371,6 +371,7 @@ const InvestConfirm = ({
 		}
 		await investmentPost(investment_id, user_id, amount, reference_id)
 			.then((res) => {
+				toast.success('Investment successful');
 				dispatch({
 					type: 'SET_USER',
 					payload: {
@@ -378,10 +379,11 @@ const InvestConfirm = ({
 						isLoggedIn: true,
 						user: {
 							...res.data.user,
-							total_apex: res.data.total_apex - amount
+							total_apex: res.data.user.total_apex - amount
 						}
 					}
 				});
+				navigate('/plans');
 			})
 			.catch((err) => {
 				return toast.error(err.response.data);
