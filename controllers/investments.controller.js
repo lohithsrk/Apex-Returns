@@ -8,7 +8,6 @@ exports.investmentGet = async (req, res) => {
             console.log(err);
             return res.status(500).send(err);
         }
-        console.log(result);
         res.json(result);
     })
 }
@@ -52,15 +51,52 @@ exports.investmentPost = async (req, res) => {
                     return res.status(500).send(err);
                 }
                 await db.query('SELECT * FROM user WHERE id = ?', [req.params.user_id], async (err, result2) => {
-                    await db.query('UPDATE user SET total_apex = ? WHERE id = ?', [result2[0].total_apex - req.body.amount, req.params.user_id], (err, result3) => {
+                    await db.query('UPDATE user SET total_apex = ? WHERE id = ?', [result2[0].total_apex - req.body.amount, req.params.user_id], async (err, result3) => {
                         if (err) {
                             console.log(err);
                             return res.status(500).send(err);
                         }
-                        res.json({
-                            message: 'Investment created',
-                            user: result2[0]
-                        });
+
+
+                        await db.query('SELECT apex_plans.* FROM investments, apex_plans WHERE user_id = ? AND investments.investment_id = apex_plans.id', [req.params.user_id], (err, results1) => {
+                            if (err) {
+                                return res.status(500).json({
+                                    error: err
+                                });
+                            }
+
+                            const allInvestments = results1;
+                            let currentDailyReturns = 0;
+                            let amountObtainedAlready = 0;
+
+                            allInvestments.forEach(async investment => {
+                                const currentDate = new Date(investment.created_at);
+                                let endDate = new Date(currentDate)
+                                endDate.setDate(endDate.getDate() + investment.return_period);
+                                const now = new Date()
+
+                                if (now > endDate) {
+                                    await db.query('DELETE FROM investments WHERE investment.investment_id = ? AND user_id = ?'), [investment.id, req.params.user_id], (err, results) => {
+                                        if (err) {
+                                            console.log(err);
+                                            return res.status(500).json({
+                                                error: err
+                                            });
+                                        }
+                                    }
+                                } else {
+                                    let dateDifference = now - currentDate;
+                                    const days = dateDifference / (1000 * 60 * 60 * 24)
+                                    currentDailyReturns += investment.deposit_amount * investment.daily_returns / 100;
+                                    console.log(currentDailyReturns);
+                                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days - 1);
+                                }
+                            });
+                            return res.json({
+                                isLoggedIn: true,
+                                user: { ...result2[0], currentDailyReturns, amountObtainedAlready }
+                            });
+                        })
                     })
                 })
             })
