@@ -30,7 +30,7 @@ exports.investmentPost = async (req, res) => {
                         console.log(err);
                         return res.status(500).json(err);
                     }
-                    if (result1.length >= 0 && result1[0].isFirstTransactionMade == 0) {
+                    if (result1[0] && (result1.length >= 0 && result1[0].isFirstTransactionMade == 0)) {
                         await db.query('UPDATE reference SET isFirstTransactionMade = 1 WHERE id = ?', [req.body.investment_id], async (err, result2) => {
                             if (err) {
                                 console.log(err);

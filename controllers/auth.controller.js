@@ -93,11 +93,12 @@ exports.loginPost = async (req, res) => {
                 } else {
                     let dateDifference = now - currentDate;
                     const days = dateDifference / (1000 * 60 * 60 * 24)
+                    console.log();
                     currentDailyReturns += investment.deposit_amount * investment.daily_returns / 100;
-                    amountObtainedAlready += investment.deposit_amount * (investment.daily_returns / 100) * days;
+                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * days;
+                    console.log(amountObtainedAlready);
                 }
             });
-            console.log(currentDailyReturns);
             return res.json({
                 isLoggedIn: true,
                 token: token,
@@ -128,12 +129,15 @@ exports.signupPost = async (req, res) => {
                     error: 'Invalid referal ID'
                 });
             }
-            if (results1.length === 0) {
-                return res.status(409).json({
-                    error: 'Invalid referal ID'
-                });
-            }
 
+            if (referalID) {
+
+                if (results1.length === 0) {
+                    return res.status(409).json({
+                        error: 'Invalid referal ID'
+                    });
+                }
+            }
             const reference_id = uuidv4()
 
             await db.query('INSERT INTO user (id, phone_number, password, reference_id, created_at) VALUES (?, ?, ?, ?, ?)', [phone_number, phone_number, hash, (referalID ? reference_id : null), new Date()], async (err, results) => {
