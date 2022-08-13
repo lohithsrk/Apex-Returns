@@ -37,7 +37,7 @@ const Orders = () => {
 							</p>
 							<p>
 								₹
-								{user.user.amountObtainedAlready
+								{user.user.amountObtainedAlready > 0
 									? user.user.amountObtainedAlready.toFixed(2)
 									: 0}
 							</p>
@@ -49,7 +49,7 @@ const Orders = () => {
 							</p>
 							<p>
 								₹
-								{user.user.currentDailyReturns
+								{user.user.currentDailyReturns > 0
 									? user.user.currentDailyReturns.toFixed(2)
 									: 0}
 							</p>
