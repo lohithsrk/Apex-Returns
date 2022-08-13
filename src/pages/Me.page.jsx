@@ -86,6 +86,7 @@ const handleMeNav = (text, dispatch, navigate, link) => {
 				type: 'SET_USER',
 				payload: null
 			});
+			navigate('/login');
 			break;
 		case 'Orders':
 			navigate(link);

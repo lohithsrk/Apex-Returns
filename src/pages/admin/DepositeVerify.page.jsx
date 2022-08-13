@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 import LOGO_FULL from '../../assets/logo_full_white.png';
 
@@ -13,6 +14,7 @@ import {
 const DepositVerify = () => {
 	const [depositRequests, setdepositRequests] = useState([]);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		depositVerificationGet().then((res) => {
@@ -37,6 +39,7 @@ const DepositVerify = () => {
 								type: 'SET_USER',
 								payload: null
 							});
+							navigate('/login');
 						}}
 						className='bg-transparent absolute top-0 right-0 w-12 pr-2 mt-3'
 					/>

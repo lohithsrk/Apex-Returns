@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet';
 import TextField from '@mui/material/TextField';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { changeUPI, UIPGet } from '../../axios/admin.axios';
 
@@ -11,6 +12,7 @@ import LOGO_FULL from '../../assets/logo_full_white.png';
 const UtilsAlter = () => {
 	const [upiID, setUpiID] = useState('');
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		UIPGet().then((res) => {
@@ -36,6 +38,7 @@ const UtilsAlter = () => {
 							type: 'SET_USER',
 							payload: null
 						});
+						navigate('/login');
 					}}
 					className='bg-transparent absolute top-0 right-0 w-12 pr-2 mt-3'
 				/>
