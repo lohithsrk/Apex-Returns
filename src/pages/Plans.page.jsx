@@ -13,7 +13,6 @@ const Plans = () => {
 
 	useEffect(() => {
 		getUserApexPlans(user.user.id).then((res) => {
-			console.log(res.data);
 			setApexPlans(res.data);
 		});
 	}, [user.user.id]);
@@ -33,7 +32,7 @@ const Plans = () => {
 							<p>
 								₹
 								{user.user.amountObtainedAlready
-									? Math.floor(user.user.amountObtainedAlready)
+									? user.user.amountObtainedAlready.toFixed(2)
 									: 0}
 							</p>
 						</div>
@@ -45,7 +44,7 @@ const Plans = () => {
 							<p>
 								₹
 								{user.user.currentDailyReturns
-									? user.user.currentDailyReturns
+									? user.user.currentDailyReturns.toFixed(2)
 									: 0}
 							</p>
 						</div>

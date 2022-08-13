@@ -85,7 +85,6 @@ const Auth = () => {
 			} else {
 				await login(phone_number, password)
 					.then((res) => {
-						console.log(res.data);
 						dispatch({
 							type: 'SET_USER',
 							payload: {
