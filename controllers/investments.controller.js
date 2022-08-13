@@ -14,7 +14,7 @@ exports.investmentGet = async (req, res) => {
 
 exports.investmentPost = async (req, res) => {
 
-    await db.query('SELECT investment_id FROM investments WHERE investment_id = ?', [req.body.investment_id], async (err, response) => {
+    await db.query('SELECT investment_id FROM investments WHERE investment_id = ? AND user_id = ?', [req.body.investment_id, req.params.user_id], async (err, response) => {
         if (err) {
             console.log(err);
             return res.status(500).json(err);
@@ -88,7 +88,6 @@ exports.investmentPost = async (req, res) => {
                                     let dateDifference = now - currentDate;
                                     const days = dateDifference / (1000 * 60 * 60 * 24)
                                     currentDailyReturns += investment.deposit_amount * investment.daily_returns / 100;
-                                    console.log(currentDailyReturns);
                                     amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days - 1);
                                 }
                             });
