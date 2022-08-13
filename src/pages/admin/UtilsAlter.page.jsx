@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { useNavigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 import { changeUPI, UIPGet } from '../../axios/admin.axios';
 
 import LOGO_FULL from '../../assets/logo_full_white.png';
 
 const UtilsAlter = () => {
-	// const navigate = useNavigate();
-
-	// const [isChangeUPIOpen, setIsChangeUPIOpen] = useState(false);
 	const [upiID, setUpiID] = useState('');
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		UIPGet().then((res) => {
@@ -25,15 +23,29 @@ const UtilsAlter = () => {
 			<Helmet>
 				<title>ADMIN HOME | APEX RETURNS</title>
 			</Helmet>
-			<div className='absolute top-0'>
+			<div className='absolute top-0 flex'>
 				<div className='w-screen bg-gray-600 p-2 h-16 bg-gradient-to-l from-cyan-500 to-[#5271ff] border-b-2 border-white'>
 					<img src={LOGO_FULL} alt='APEX RETURNS' className='w-36' />
 				</div>
+				<img
+					src='https://img.icons8.com/external-regular-kawalan-studio/96/ffffff/external-logout-user-interface-regular-kawalan-studio.png'
+					alt='LOGOUT'
+					onClick={() => {
+						toast.success('Logged out');
+						dispatch({
+							type: 'SET_USER',
+							payload: null
+						});
+					}}
+					className='bg-transparent absolute top-0 right-0 w-12 pr-2 mt-3'
+				/>
 			</div>
 			{/* {isChangeUPIOpen && ( */}
 			<div className=' z-50 w-screen fixed flex items-center justify-center'>
 				<div className='bg-white shadow-lg p-5 rounded m-5'>
-					<h1 className='text-center pb-5 text-lg font-semibold'>Change UPI ID</h1>
+					<h1 className='text-center pb-5 text-lg font-semibold'>
+						Change UPI ID
+					</h1>
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();

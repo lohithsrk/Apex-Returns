@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
+import { UIPGet } from '../axios/admin.axios';
 
 import LOGO_COLORED from '../assets/logo-colored.png';
 import LOGO from '../assets/logo.png';
@@ -11,12 +12,17 @@ import LOGONav from '../assets/logo_full_white.png';
 const Deposit = () => {
 	const [selectedApex, setSelectedApex] = useState(0);
 	const [customApex, setCustomApex] = useState('');
+	const [UPI_ID, setUPI_ID] = useState('');
 
 	const { user } = useSelector((state) => ({ ...state }));
 
 	const navigate = useNavigate();
 
-	const UPI_ID = 'bk0442089@okhdfcbank';
+	useEffect(() => {
+		UIPGet().then((res) => {
+			setUPI_ID(res.data);
+		});
+	}, []);
 
 	const handleAddApexClick = (amount) => {
 		if (selectedApex < 500) {

@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
 
 import {
 	withdrawRequestsGet,
@@ -10,6 +12,7 @@ import LOGO_FULL from '../../assets/logo_full_white.png';
 
 const WithdrawRequest = () => {
 	const [withdrawRequests, setWithdrawRequests] = useState([]);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		withdrawRequestsGet().then((res) => {
@@ -29,6 +32,18 @@ const WithdrawRequest = () => {
 			<div>
 				<div className='w-screen bg-gray-600 p-2 h-16 bg-gradient-to-l from-cyan-500 to-[#5271ff] border-b-2 border-white'>
 					<img src={LOGO_FULL} alt='APEX RETURNS' className='w-36' />
+					<img
+						src='https://img.icons8.com/external-regular-kawalan-studio/96/ffffff/external-logout-user-interface-regular-kawalan-studio.png'
+						alt='LOGOUT'
+						onClick={() => {
+							toast.success('Logged out');
+							dispatch({
+								type: 'SET_USER',
+								payload: null
+							});
+						}}
+						className='bg-transparent absolute top-0 right-0 w-12 pr-2 mt-3'
+					/>
 				</div>
 				<div className='p-2 pb-20'>
 					<div className='grid grid-cols-5 pb-2 border-b-2 border-[#5271ff]'>
