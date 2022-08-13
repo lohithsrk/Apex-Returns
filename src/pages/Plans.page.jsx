@@ -62,7 +62,10 @@ const Plans = () => {
 							.map((plan, index) => {
 								return (
 									<>
-										<div className='bg-white p-5 w-64 rounded-lg shadow-md shadow-slate-500 mt-10 bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'>
+										<div
+											className='bg-white p-5 w-64 rounded-lg shadow-md shadow-slate-500 mt-10 bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'
+											key={index}
+										>
 											<h2 className='font-semibold text-xl text-center pb-2'>
 												{plan.name}
 											</h2>

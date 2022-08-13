@@ -3,12 +3,14 @@ import logger from 'redux-logger';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
-import {rootReducer} from './root-reducer';
+import { rootReducer } from './root-reducer';
+
+import { NODE_ENV } from '../utils/common.util';
 
 
 const middlewares = [];
 
-if (process.env.NODE_ENV === 'development') {
+if (NODE_ENV === 'development') {
 	middlewares.push(logger);
 }
 

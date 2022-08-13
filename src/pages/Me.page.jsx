@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
@@ -7,11 +8,19 @@ import { RWebShare } from 'react-web-share';
 import LOGO from '../assets/logo-colored.png';
 import LOGO_FULL from '../assets/logo_full_white.png';
 
+import { referGet } from '../axios/reference.axios';
+
 const Me = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	const [refer, setRefer] = useState({});
 	const { user } = useSelector((state) => ({ ...state }));
+
+	useEffect(() => {
+		referGet(user.user.id).then((res) => setRefer(res.data));
+	}, []);
+
 	return (
 		<>
 			<Helmet>
@@ -23,6 +32,18 @@ const Me = () => {
 				</div>
 				<div className='bg-gradient-to-l from-cyan-500 to-[#5271ff] flex justify-end px-2 py-1'>
 					<p className='inline text-white text-sm'>My ID: {user.user.id}</p>
+				</div>
+				<div className='grid grid-cols-3'>
+					{buttonDatas.map((buttonData, index) => (
+						<Buttons
+							key={index}
+							img={buttonData.img}
+							text={buttonData.text}
+							dispatch={dispatch}
+							navigate={navigate}
+							link={buttonData.link ? buttonData.link : null}
+						/>
+					))}
 				</div>
 				<div className='flex justify-between items-center text-xs p-2 bg-gray-100'>
 					<h2>Refer your friends and get rewarded of ₹50</h2>
@@ -38,17 +59,19 @@ const Me = () => {
 						</button>
 					</RWebShare>
 				</div>
-				<div className='grid grid-cols-3'>
-					{buttonDatas.map((buttonData, index) => (
-						<Buttons
-							key={index}
-							img={buttonData.img}
-							text={buttonData.text}
-							dispatch={dispatch}
-							navigate={navigate}
-							link={buttonData.link ? buttonData.link : null}
-						/>
-					))}
+				<div className='flex justify-between p-2'>
+					<div className='flex items-center justify-center flex-col p-3 rounded shadow-md w-1/2 mr-1'>
+						<p className='text-xs font-medium text-gray-400'>TOTAL REFERRALS</p>
+						<h1 className='text-[#5271ff] font-bold text-2xl'>
+							{refer.total_referrals ? refer.total_referrals : 0}
+						</h1>
+					</div>
+					<div className='flex items-center justify-center flex-col p-3 rounded shadow-md w-1/2 ml-1'>
+						<p className='text-xs font-medium text-gray-400'>TOTAL REWARDS</p>
+						<h1 className='text-[#5271ff] font-bold text-2xl'>
+							₹{refer.total_rewards ? refer.total_rewards : 0}
+						</h1>
+					</div>
 				</div>
 			</div>
 		</>
