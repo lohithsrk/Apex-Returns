@@ -10,3 +10,16 @@ export const UIPGet = async () =>
 
 export const withdrawRequestsGet = async () =>
     await axios.get(`${BASE_URL}/admin/withdraw`);
+
+export const withdrawRequestsPost = async (approved, id, user_id, amount) =>
+    await axios.post(`${BASE_URL}/admin/withdraw`, {
+        approved, id, user_id, amount
+    });
+
+export const depositVerificationGet = async () =>
+    await axios.get(`${BASE_URL}/admin/deposit`);
+
+export const depositVerificationPost = async (verification, id, user_id, amount) =>
+    await axios.post(`${BASE_URL}/admin/deposit`, {
+        verification, id, user_id, amount
+    });

@@ -33,6 +33,7 @@ const UtilsAlter = () => {
 			{/* {isChangeUPIOpen && ( */}
 			<div className=' z-50 w-screen fixed flex items-center justify-center'>
 				<div className='bg-white shadow-lg p-5 rounded m-5'>
+					<h1 className='text-center pb-5 text-lg font-semibold'>Change UPI ID</h1>
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
