@@ -16,7 +16,7 @@ const Deposit = () => {
 
 	const navigate = useNavigate();
 
-	const UPI_ID = 'srklohith05@apl';
+	const UPI_ID = 'bk0442089@okhdfcbank';
 
 	const handleAddApexClick = (amount) => {
 		if (selectedApex < 500) {

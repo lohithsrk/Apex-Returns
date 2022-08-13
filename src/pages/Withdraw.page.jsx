@@ -23,7 +23,9 @@ const Withdraw = () => {
 			createWithdraw(user.user.id, amount, upiInput)
 				.then((res) => {
 					if (res.status === 200) {
-						toast.success(res.data.message);
+						toast.success(
+							'Your withdrawal request will be processed within two days.'
+						);
 						setAmount(0);
 						setUpiInput('');
 					} else {
@@ -79,7 +81,9 @@ const Withdraw = () => {
 							value={upiInput}
 							onChange={(e) => setUpiInput(e.target.value)}
 						/>
-						<p className='text-white text-xs'>Our APEX requires 8% tax</p>
+						<p className='text-white text-xs'>
+							Withdrawal fee and tax 8% applicable
+						</p>
 						<div
 							className='bg-white shadow font-semibold text-[#5271ff] p-2 px-3 rounded mt-3'
 							onClick={handleWithdraw}

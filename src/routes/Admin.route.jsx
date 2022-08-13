@@ -6,9 +6,9 @@ import { useLocation, Outlet } from 'react-router-dom';
 
 import { validateUser } from '../axios/auth.axios';
 
-import NavbarMobile from '../components/Mobile/NavbarMobile.component';
+import NavbarMobileAdmin from '../components/Mobile/NavbarMobileAdmin.component.jsx';
 
-const UserRoute = () => {
+const AdminRoute = () => {
 	const { user } = useSelector((state) => ({ ...state }));
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -36,14 +36,16 @@ const UserRoute = () => {
 		}
 	}, [dispatch, user, location.pathname, navigate]);
 
-	return user && user.token.length ? (
-		<>
-			<NavbarMobile />
-			<Outlet />
-		</>
-	) : (
-		<Navigate to='login' />
+	return (
+		user &&
+		user.token.length &&
+		user.user.role === 'admin' && (
+			<>
+				<NavbarMobileAdmin />
+				<Outlet />
+			</>
+		)
 	);
 };
 
-export default UserRoute;
+export default AdminRoute;

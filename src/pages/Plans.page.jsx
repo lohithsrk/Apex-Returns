@@ -12,7 +12,10 @@ const Plans = () => {
 	const { user } = useSelector((state) => ({ ...state }));
 
 	useEffect(() => {
-		getUserApexPlans(user.user.id).then((res) => setApexPlans(res.data));
+		getUserApexPlans(user.user.id).then((res) => {
+			console.log(res.data);
+			setApexPlans(res.data);
+		});
 	}, [user.user.id]);
 	return (
 		<>

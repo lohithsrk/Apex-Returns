@@ -12,7 +12,12 @@ import Payment from './pages/Payment.page';
 import Withdraw from './pages/Withdraw.page';
 import About from './pages/About.page';
 
+import DepositeVerify from './pages/admin/DepositeVerify.page';
+import UtilsAlter from './pages/admin/UtilsAlter.page';
+import WithdrawRequest from './pages/admin/WithdrawRequest.page';
+
 import UserRoute from './routes/User.route';
+import AdminRoute from './routes/Admin.route';
 
 const App = () => {
   return (
@@ -54,9 +59,16 @@ const App = () => {
         <Route path="/" element={<UserRoute />} >
           <Route path="/about" element={<About />} />
         </Route>
-        {/* <Route path="/" element={<UserRoute />} >
-          <Route path="/referral" element={<Referral />} />
-        </Route> */}
+        <Route path="/" element={<AdminRoute />} >
+          <Route path="/admin/withdraw" element={<WithdrawRequest />} />
+        </Route>
+        <Route path="/" element={<AdminRoute />} >
+          <Route path="/admin/deposit" element={<DepositeVerify />} />
+        </Route>
+        <Route path="/" element={<AdminRoute />} >
+          <Route path="/admin/utility" element={<UtilsAlter />} />
+        </Route>
+
         <Route path="/login" element={<Auth />} />
         <Route path="/signup" exact element={<Auth />} />
         <Route path="*" exact element={<p>404</p>} />

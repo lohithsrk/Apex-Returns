@@ -139,11 +139,11 @@ const buttonDatas = [
 		text: 'Orders',
 		link: '/orders'
 	},
-	{
-		img: 'https://img.icons8.com/material-rounded/48/5271ff/paid-bill.png',
-		text: 'Team',
-		link: '/team'
-	},
+	// {
+	// 	img: 'https://img.icons8.com/material-rounded/48/5271ff/paid-bill.png',
+	// 	text: 'Team',
+	// 	link: '/team'
+	// },
 	{
 		img: 'https://img.icons8.com/fluency/96/000000/chat-message.png',
 		text: 'Customer Support',
