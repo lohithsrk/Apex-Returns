@@ -90,7 +90,7 @@ exports.loginPost = async (req, res) => {
 
                 new Promise(async (myResolve, myReject) => {
 
-                    await db.query('UPDATE user SET old_amount = 0 WHERE id = ?', [phone_number], (err, resu) => {
+                    await db.query('UPDATE user SET amount = 0 WHERE id = ?', [phone_number], (err, resu) => {
                         if (err) {
                             console.log(err);
                             return res.status(500).json({
@@ -98,7 +98,7 @@ exports.loginPost = async (req, res) => {
                             });
                         }
                         result.forEach(async r => {
-                            await db.query('UPDATE user SET old_amount = old_amount + ? WHERE id = ?', [r.total_return, phone_number], (err, resu) => {
+                            await db.query('UPDATE user SET amount = amount + ? WHERE id = ?', [r.total_return, phone_number], (err, resu) => {
                                 if (err) {
                                     console.log(err);
                                     return res.status(500).json({
@@ -118,20 +118,44 @@ exports.loginPost = async (req, res) => {
                             });
                         }
                         const total = resul.reduce((prev, curr) => prev + curr.amount, 0);
-                        await db.query('UPDATE user SET old_amount = old_amount - ? WHERE id = ?', [total, phone_number], (err, resu) => {
+
+
+
+
+                        await db.query('SELECT apex_plans.*, investments.expired FROM investments, apex_plans WHERE user_id = ? AND investments.investment_id = apex_plans.id', [results[0].id], async (err, results1) => {
                             if (err) {
-                                console.log(err);
                                 return res.status(500).json({
-                                    error: 'Something went wrong'
+                                    error: err
                                 });
                             }
+
+                            const allInvestments = results1;
+                            let amountObtainedAlready = 0;
+
+                            allInvestments.forEach(async investment => {
+                                const currentDate = new Date(investment.created_at);
+                                let endDate = new Date(currentDate)
+                                endDate.setDate(endDate.getDate() + investment.return_period);
+
+                                if (now < endDate) {
+
+                                    let dateDifference = endDate - (now - currentDate);
+                                    const days = dateDifference / (1000 * 60 * 60 * 24)
+
+                                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days - 1);
+                                }
+                            });
+                            await db.query('UPDATE user SET amount = amount - ? WHERE id = ?', [total - amountObtainedAlready, phone_number], (err, resu) => {
+                                if (err) {
+                                    console.log(err);
+                                    return res.status(500).json({
+                                        error: 'Something went wrong'
+                                    });
+                                }
+                            })
                         })
                     })
                 })
-
-
-
-
             })
         })
 
@@ -141,7 +165,6 @@ exports.loginPost = async (req, res) => {
                     error: err
                 });
             }
-
             const allInvestments = results1;
             let currentDailyReturns = 0;
             let amountObtainedAlready = 0;
@@ -151,16 +174,7 @@ exports.loginPost = async (req, res) => {
                 let endDate = new Date(currentDate)
                 endDate.setDate(endDate.getDate() + investment.return_period);
 
-                if (now > endDate) {
-                    await db.query('DELETE FROM investments WHERE investment.investment_id = ? AND user_id = ?'), [investment.id, results[0].id], (err, results) => {
-                        if (err) {
-                            console.log(err);
-                            return res.status(500).json({
-                                error: err
-                            });
-                        }
-                    }
-                } else {
+                if (now < endDate) {
                     let dateDifference = now - currentDate;
                     const days = dateDifference / (1000 * 60 * 60 * 24)
                     currentDailyReturns += investment.deposit_amount * investment.daily_returns / 100;
