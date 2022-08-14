@@ -11,6 +11,9 @@ const Withdraw = () => {
 	const { user } = useSelector((state) => ({ ...state }));
 	const [amount, setAmount] = useState(0);
 	const [upiInput, setUpiInput] = useState('');
+	const [name, setName] = useState('');
+	const [IFSC, setIFSC] = useState('');
+	const [accountNum, setAccountNum] = useState('');
 
 	const handleWithdraw = () => {
 		const minWithdrawAmount = 250;
@@ -20,7 +23,7 @@ const Withdraw = () => {
 		} else if (amount > user.user.amount) {
 			return toast.error('Not enough balance');
 		} else {
-			createWithdraw(user.user.id, amount, upiInput)
+			createWithdraw(user.user.id, amount, upiInput, name, IFSC, accountNum)
 				.then((res) => {
 					if (res.status === 200) {
 						toast.success(
@@ -68,7 +71,7 @@ const Withdraw = () => {
 					<div className='w-screen flex flex-col items-center justify-center mb-16'>
 						<input
 							type='text'
-							className='border-b-[2px] border-white w-2/5 outline-none p-2 pb-1 text-white font-medium bg-transparent max-w-prose mb-10 text-center placeholder:text-white placeholder:text-opacity-50 '
+							className='border-b-[2px] border-white w-2/5 outline-none p-2 pb-1 text-white font-medium bg-transparent max-w-prose mb-5 text-center placeholder:text-white placeholder:text-opacity-50 '
 							autoFocus
 							placeholder='Enter the amount'
 							onInput={(e) => setAmount(e.target.value.replace(/\D/g, ''))}
@@ -76,10 +79,34 @@ const Withdraw = () => {
 						/>
 						<input
 							type='text'
-							className='border-b-[2px] border-white w-2/5 outline-none p-2 pb-1 text-white font-medium bg-transparent max-w-prose mb-10 text-center placeholder:text-white placeholder:text-opacity-50'
+							className='border-b-[2px] border-white w-2/5 outline-none p-2 pb-1 text-white font-medium bg-transparent max-w-prose mb-5 text-center placeholder:text-white placeholder:text-opacity-50'
 							placeholder='Enter your UPI ID'
 							value={upiInput}
 							onChange={(e) => setUpiInput(e.target.value)}
+						/>
+						<input
+							type='text'
+							className='border-b-[2px] border-white w-2/5 outline-none p-2 pb-1 text-white font-medium bg-transparent max-w-prose mb-5 text-center placeholder:text-white placeholder:text-opacity-50'
+							placeholder='Name'
+							value={name}
+							onChange={(e) => setName(e.target.value)}
+						/>
+						<input
+							type='text'
+							className='border-b-[2px] border-white w-2/5 outline-none p-2 pb-1 text-white font-medium bg-transparent max-w-prose mb-5 text-center placeholder:text-white placeholder:text-opacity-50'
+							placeholder='IFSC Code'
+							value={IFSC}
+							onChange={(e) => setIFSC(e.target.value)}
+						/>
+						<input
+							type='text'
+							className='border-b-[2px] border-white w-2/5 outline-none p-2 pb-1 text-white font-medium bg-transparent max-w-prose mb-5 text-center placeholder:text-white placeholder:text-opacity-50'
+							placeholder='Account Number'
+							value={accountNum}
+							onChange={(e) => setAccountNum(e.target.value)}
+							onInput={(e) => {
+								setAccountNum(e.target.value.replace(/[^0-9]/g, ''));
+							}}
 						/>
 						<p className='text-white text-xs'>
 							Withdrawal fee and tax 8% applicable
