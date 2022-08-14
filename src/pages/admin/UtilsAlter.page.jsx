@@ -69,10 +69,6 @@ const UtilsAlter = () => {
 							}}
 							value={upiID}
 							onChange={(e) => setUpiID(e.target.value)}
-							inputProps={{
-								maxLength: 10,
-								minLength: 10
-							}}
 							autoFocus
 						/>
 						<button className='p-2 w-full text-center text-white  bg-gradient-to-l from-cyan-500 to-[#5271ff] mt-3 rounded'>
