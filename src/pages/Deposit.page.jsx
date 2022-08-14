@@ -29,7 +29,8 @@ const Deposit = () => {
 			return toast.error('Please select an apex of 500 or more');
 		}
 
-		const paymentLink = `upi://pay?pn=UPAYI&pa=${UPI_ID}&cu=INR&am=${amount}/`;
+		const paymentLink = `upi://pay?pn=Eagle%20Alpha&pa=${UPI_ID}&cu=INR&am=${amount}/`;
+		// upi://pay/?pa=maypay.MyPay983877@icici&pn=Eagle%20Alpha&tn=&am=%27500%27&cu=INR
 
 		window.location = paymentLink;
 		const qr = 'https://upayi.ml/qr/' + UPI_ID + '/' + amount;
