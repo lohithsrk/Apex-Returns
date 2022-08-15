@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { UIPGet } from '../axios/admin.axios';
+import { toast } from 'react-toastify';
+// import { UIPGet } from '../axios/admin.axios';
+import { createDeposit } from '../axios/payment.axios';
 
 import LOGO_COLORED from '../assets/logo-colored.png';
 import LOGO from '../assets/logo.png';
@@ -12,38 +12,40 @@ import LOGONav from '../assets/logo_full_white.png';
 const Deposit = () => {
 	const [selectedApex, setSelectedApex] = useState(0);
 	const [customApex, setCustomApex] = useState('');
-	const [UPI_ID, setUPI_ID] = useState('');
+	const [isDepositClicked, setIsDepositClicked] = useState(false);
 
 	const { user } = useSelector((state) => ({ ...state }));
 
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		UIPGet().then((res) => {
-			setUPI_ID(res.data);
-		});
-	}, []);
+	// useEffect(() => {
+	// 	UIPGet().then((res) => {
+	// 		setUPI_ID(res.data);
+	// 	});
+	// }, []);
 
 	const handleAddApexClick = (amount) => {
 		if (selectedApex < 500) {
 			return toast.error('Please select an apex of 500 or more');
+		} else {
+			// const paymentLink = `upi://pay?pn=Eagle%20Alpha&pa=${UPI_ID}&cu=INR&am=${amount}/`;
+			// // upi://pay/?pa=maypay.MyPay983877@icici&pn=Eagle%20Alpha&tn=&am=%27500%27&cu=INR
+
+			// window.location = paymentLink;
+			// const qr = 'https://upayi.ml/qr/' + UPI_ID + '/' + amount;
+
+			// navigate('/deposit/apex/payment', {
+			// 	state: {
+			// 		UPI_ID: UPI_ID,
+			// 		amount: selectedApex,
+			// 		paymentLink,
+			// 		qr,
+			// 		user
+			// 	}
+			// });
+			setIsDepositClicked(true);
+			createDeposit(user.user.id, selectedApex).then((res) => {
+				window.location = res.data;
+			});
 		}
-
-		const paymentLink = `upi://pay?pn=Eagle%20Alpha&pa=${UPI_ID}&cu=INR&am=${amount}/`;
-		// upi://pay/?pa=maypay.MyPay983877@icici&pn=Eagle%20Alpha&tn=&am=%27500%27&cu=INR
-
-		window.location = paymentLink;
-		const qr = 'https://upayi.ml/qr/' + UPI_ID + '/' + amount;
-
-		navigate('/deposit/apex/payment', {
-			state: {
-				UPI_ID: UPI_ID,
-				amount: selectedApex,
-				paymentLink,
-				qr,
-				user
-			}
-		});
 	};
 
 	return (
@@ -118,11 +120,14 @@ const Deposit = () => {
 					<p>Deposit amount:</p>
 					<p>₹{customApex ? customApex : 0}</p>
 				</div>
-				<div
-					className='p-2 bg-gradient-to-l from-cyan-500 to-[#5271ff] m-3 rounded-lg text-white text-center'
-					onClick={() => handleAddApexClick(selectedApex)}
-				>
-					Deposite
+				<div className='p-3'>
+					<button
+						className='p-2 box-border w-full outline-none bg-gradient-to-l from-cyan-500 to-[#5271ff] rounded-lg text-white text-center'
+						onClick={() => handleAddApexClick(selectedApex)}
+						disabled={isDepositClicked}
+					>
+						{isDepositClicked ? 'Please wait...' : 'Deposit'}
+					</button>
 				</div>
 				{/* <p className='underline text-center text-xs text-[#5271ff]'>Get help</p> */}
 			</div>

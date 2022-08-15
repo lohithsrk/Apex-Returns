@@ -9,12 +9,12 @@ import Deposit from './pages/Deposit.page';
 import Plans from './pages/Plans.page';
 import Me from './pages/Me.page';
 import Auth from './pages/Auth.page';
-import Payment from './pages/Payment.page';
+// import Payment from './pages/Payment.page';
 import Withdraw from './pages/Withdraw.page';
 import About from './pages/About.page';
 
-import DepositeVerify from './pages/admin/DepositeVerify.page';
-import UtilsAlter from './pages/admin/UtilsAlter.page';
+// import DepositeVerify from './pages/admin/DepositeVerify.page';
+// import UtilsAlter from './pages/admin/UtilsAlter.page';
 import WithdrawRequest from './pages/admin/WithdrawRequest.page';
 import Promoters from './pages/admin/Promoters.page';
 
@@ -39,7 +39,7 @@ const App = () => {
         pauseOnHover
       />
       < Routes >
-        {user && user.user.role === 'standard' ? <>
+        {user && (user.user.role === 'standard' || user.user.role === 'promoter') ? <>
           <Route path="/" element={<UserRoute />} >
             <Route path="/" element={<Home />} />
           </Route>
@@ -55,9 +55,9 @@ const App = () => {
           <Route path="/" element={<UserRoute />} >
             <Route path="me" exact element={<Me />} />
           </Route>
-          <Route path="/" element={<UserRoute />} >
+          {/* <Route path="/" element={<UserRoute />} >
             <Route path="/deposit/apex/payment" element={<Payment />} />
-          </Route>
+          </Route> */}
           <Route path="/" element={<UserRoute />} >
             <Route path="/withdraw" element={<Withdraw />} />
           </Route>
@@ -65,15 +65,15 @@ const App = () => {
             <Route path="/about" element={<About />} />
           </Route></>
           : <>
-            <Route path="/" element={<AdminRoute />} >
+            {/* <Route path="/" element={<AdminRoute />} >
               <Route path="/" element={<UtilsAlter />} />
-            </Route>
+            </Route> */}
             <Route path="/" element={<AdminRoute />} >
-              <Route path="/withdraw" element={<WithdrawRequest />} />
+              <Route path="/" element={<WithdrawRequest />} />
             </Route>
-            <Route path="/" element={<AdminRoute />} >
+            {/* <Route path="/" element={<AdminRoute />} >
               <Route path="/deposit" element={<DepositeVerify />} />
-            </Route>
+            </Route> */}
             <Route path="/" element={<AdminRoute />} >
               <Route path="/promoters" element={<Promoters />} />
             </Route>
