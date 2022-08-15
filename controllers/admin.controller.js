@@ -176,3 +176,36 @@ exports.depositVerificationPost = async (req, res) => {
         }
     })
 }
+
+exports.addPromoter = async (req, res) => {
+    await db.query('SELECT id FROM user WHERE id = ?', [req.body.id], async (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Error');
+        } else {
+            if (result.length === 0) {
+                res.status(400).send('User not found');
+            } else {
+                await db.query('UPDATE user SET role = "promoter" WHERE id = ?', [req.body.id], async (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send('Error');
+                    } else {
+                        res.json('Promoter added');
+                    }
+                })
+            }
+        }
+    })
+}
+
+exports.promotersGet = async (req, res) => {
+    await db.query('select reference.referred_by, COUNT(reference.referred_by), user.created_at from reference,user where user.role = "promoter" and user.id = reference.referred_by', (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send('Error');
+        } else {
+            res.json(result);
+        }
+    })
+}
