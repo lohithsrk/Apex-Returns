@@ -17,16 +17,19 @@ const NavbarMobile = () => {
 				? 1
 				: location.pathname === '/deposit'
 				? 2
+				: location.pathname === '/promoters'
+				? 3
 				: 50
 	});
-	const circlePosition = Math.round(window.innerWidth / 50 / 10) * 10;
+	const circlePosition = Math.round(window.innerWidth / 50 / 10) * 6;
 
 	return (
 		<div className='fixed bg-white bottom-0 left-0 right-0 shadow-[0_-2px_5px_rgba(0,0,0,0.25)] py-2 z-50'>
 			<div
 				className={`rounded-full w-11 h-11 absolute -z-10 translate-y-3/4 bottom-[5.2rem] bg-gradient-to-l from-cyan-500 to-[#5271ff] drop-shadow-[0_-2px_5px_rgba(0,0,0,0.25)]`}
 				style={{
-					left: `${circlePosition + selected.index * 33.3}%`,
+					left: `${circlePosition + selected.index * 25
+					}%`,
 					transition: 'left 0.2s ease-out'
 				}}
 			></div>
@@ -106,6 +109,15 @@ const navItems = [
 			'https://img.icons8.com/fluency-systems-regular/48/9e9e9e/quick-mode-on.png',
 		fillIcon:
 			'https://img.icons8.com/ios-filled/50/ffffff/quick-mode-on--v1.png'
+	}
+	,
+	{
+		name: 'Promoters',
+		link: '/promoters',
+		outlineIcon:
+			'https://img.icons8.com/ios/50/9e9e9e/talk-male.png',
+		fillIcon:
+			'https://img.icons8.com/ios-filled/50/ffffff/talk-male.png'
 	}
 ];
 

@@ -23,3 +23,9 @@ export const depositVerificationPost = async (verification, id, user_id, amount)
     await axios.post(`${BASE_URL}/admin/deposit`, {
         verification, id, user_id, amount
     });
+
+export const promotersGet = async () =>
+    await axios.get(`${BASE_URL}/admin/promoters`);
+
+export const addPromoter = async (id) =>
+    await axios.post(`${BASE_URL}/admin/promoters`, { id });

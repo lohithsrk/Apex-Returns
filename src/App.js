@@ -16,6 +16,7 @@ import About from './pages/About.page';
 import DepositeVerify from './pages/admin/DepositeVerify.page';
 import UtilsAlter from './pages/admin/UtilsAlter.page';
 import WithdrawRequest from './pages/admin/WithdrawRequest.page';
+import Promoters from './pages/admin/Promoters.page';
 
 import UserRoute from './routes/User.route';
 import AdminRoute from './routes/Admin.route';
@@ -72,6 +73,9 @@ const App = () => {
             </Route>
             <Route path="/" element={<AdminRoute />} >
               <Route path="/deposit" element={<DepositeVerify />} />
+            </Route>
+            <Route path="/" element={<AdminRoute />} >
+              <Route path="/promoters" element={<Promoters />} />
             </Route>
           </>}
 
