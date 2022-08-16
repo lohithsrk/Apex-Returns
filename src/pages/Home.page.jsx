@@ -14,7 +14,6 @@ import './styles.css';
 import { getApexPlans } from '../axios/apexPlans.axios';
 import { investmentPost } from '../axios/investments.axios';
 import { verifyDeposit } from '../axios/payment.axios';
-import { validateUser } from '../axios/auth.axios';
 
 import LOGO from '../assets/logo_full_white.png';
 import Slide1 from '../assets/slide1.svg';
