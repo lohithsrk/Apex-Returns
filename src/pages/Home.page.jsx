@@ -32,37 +32,32 @@ const Home = () => {
 	const [apexPlans, setApexPlans] = useState([]);
 	const [isConfirmOpened, setIsConfirmOpened] = useState(false);
 	const [choosenPlan, setChoosenPlan] = useState({});
-	const [count, setCount] = useState(0);
 
 	useEffect(() => {
 		getApexPlans().then((res) => setApexPlans(res.data));
-		if (count===0) {
-			searchParams.get('client_txn_id') &&
-				verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
-					(res) => {
-						if (res.status === 200) {
-							toast.success(res.data.message);
-							dispatch({
-								type: 'SET_USER',
-								payload: {
-									token: user.token,
-									isLoggedIn: true,
-									user: {
-										...user.user,
-										total_apex: user.user.total_apex + res.data.amount
-									}
-								}
-							});
-							navigate('/');
-							setCount(1);
-						} else {
-							toast.error(res.data);
-							setCount(1);
+	}, []);
+	searchParams.get('client_txn_id') &&
+		verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
+			(res) => {
+				if (res.status === 200) {
+					toast.success(res.data.message);
+					dispatch({
+						type: 'SET_USER',
+						payload: {
+							token: user.token,
+							isLoggedIn: true,
+							user: {
+								...user.user,
+								total_apex: user.user.total_apex + res.data.amount
+							}
 						}
-					}
-				);
-		}
-	}, [searchParams, user.user.id, user.token, dispatch, navigate, user.user]);
+					});
+					navigate('/');
+				} else {
+					toast.error(res.data);
+				}
+			}
+		);
 
 	const percentage = (daily_returns, return_period, deposit_amount) =>
 		(daily_returns * return_period) / deposit_amount;
