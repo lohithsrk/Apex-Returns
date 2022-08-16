@@ -45,13 +45,16 @@ const Home = () => {
 							dispatch({
 								type: 'SET_USER',
 								payload: {
-									...user.user,
-									total_apex: resp.data.user.total_apex + res.data.amount
+									token: user.token,
+									isLoggedIn: true,
+									user: {
+										...user.user,
+										total_apex: resp.data.user.total_apex + res.data.amount
+									}
 								}
 							});
+							navigate('/');
 						});
-
-						navigate('/');
 					} else {
 						toast.error(res.data);
 					}
