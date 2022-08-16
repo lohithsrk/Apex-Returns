@@ -1,16 +1,16 @@
 import { useState } from 'react';
-import copy from 'copy-to-clipboard';
+// import copy from 'copy-to-clipboard';
 import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import TextField from '@mui/material/TextField';
 
-import { createdeposit } from '../axios/payment.axios';
+import { createDepositBackup } from '../axios/payment.axios';
 
 import LOGO from '../assets/logo_full_white.png';
 
 const Payment = () => {
-	const [copyText, setCopyText] = useState('');
+	// const [copyText, setCopyText] = useState('');
 	const [referenceID, setReferenceID] = useState('');
 
 	const location = useLocation();
@@ -18,14 +18,14 @@ const Payment = () => {
 	const { state } = location;
 	const { UPI_ID, qr, paymentLink, user, amount } = state;
 
-	const copy_UPI_ID = () => {
-		setCopyText(UPI_ID);
-		copy(UPI_ID);
-		toast.success('UPI ID copied to clipboard');
-	};
+	// const copy_UPI_ID = () => {
+	// setCopyText(UPI_ID);
+	// copy(UPI_ID);
+	// 	toast.success('UPI ID copied to clipboard');
+	// };
 
 	const handleSubmit = async (e) => {
-		await createdeposit(user.user.id, amount, referenceID).then((res) => {
+		await createDepositBackup(user.user.id, amount, referenceID).then((res) => {
 			if (res.data.message === 'Success') {
 				toast.success(
 					'Payment waiting for confirmation. Your APEX will be added to your account after confirmation.'
@@ -60,7 +60,7 @@ const Payment = () => {
 				</div>
 				<div className='pt-12 flex flex-col items-center text-center'>
 					{/* <img src={qr} alt='QR' className='w-44 h-44' /> */}
-					<div
+					{/* <div
 						className='flex 
 				'
 					>
@@ -68,7 +68,7 @@ const Payment = () => {
 						<h2 onClick={() => copy_UPI_ID()} className='ml-2'>
 							{!copyText ? 'Copy' : 'Copied'}
 						</h2>
-					</div>
+					</div> */}
 					<div
 						className={`${
 							window.innerWidth > 800 ? 'hidden' : 'block'
@@ -94,8 +94,8 @@ const Payment = () => {
 						variant='outlined'
 						sx={{
 							width: '100%',
-							marginBottom:'.5rem',
-							marginTop:'1rem'
+							marginBottom: '.5rem',
+							marginTop: '1rem'
 						}}
 						value={referenceID}
 						onChange={(e) => setReferenceID(e.target.value)}
