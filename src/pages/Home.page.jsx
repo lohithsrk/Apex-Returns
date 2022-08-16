@@ -39,7 +39,14 @@ const Home = () => {
 			verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
 				(res) => {
 					if (res.status === 200) {
-						toast.success(res.data);
+						toast.success(res.data.message);
+						dispatch({
+							type: 'SET_USER',
+							payload: {
+								...user.user,
+								total_apex: user.user.total_apex + res.data.amount
+							}
+						});
 						navigate('/');
 					} else {
 						toast.error(res.data);
