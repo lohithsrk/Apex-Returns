@@ -87,6 +87,7 @@ exports.investmentPost = async (req, res) => {
                                 } else {
                                     let dateDifference = now - currentDate;
                                     const days = dateDifference / (1000 * 60 * 60 * 24)
+                                    console.log(days);
                                     currentDailyReturns += investment.deposit_amount * investment.daily_returns / 100;
                                     amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days - 1);
                                 }

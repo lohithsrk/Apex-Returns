@@ -34,13 +34,11 @@ exports.withdrawRequestsGet = async (req, res) => {
 }
 
 exports.withdrawRequestsPost = async (req, res) => {
-    console.log(req.body);
     await db.query('UPDATE withdraw SET approved = ? WHERE id = ?', [req.body.approved, req.body.id], async (err, result) => {
         if (err) {
             console.log(err);
             return res.status(500).send('Error');
         } else {
-            console.log(result);
             await db.query('UPDATE user SET amount = amount - ? WHERE id = ?', [req.body.amount, req.body.user_id], async (err, result) => {
                 if (err) {
                     console.log(err);

@@ -57,13 +57,19 @@ exports.verifyDeposit = async (req, res) => {
     axios(config)
         .then(async (response) => {
             if (response.data.data.status == 'success') {
-                await db.query('UPDATE user SET total_apex = total_apex + ? WHERE id = ?', [response.data.data.amount, req.body.user_id], (err, result) => {
+                await db.query('UPDATE user SET total_apex = total_apex + ? WHERE id = ?', [response.data.data.amount, req.body.user_id], async (err, result) => {
                     if (err) {
                         console.log(err);
                         res.status(500).send('Error');
                     } else {
-                        console.log(response.data.data.status);
-                        res.status(200).json({ message: 'Payment Successful', amount: response.data.data ? response.data.data.amount : 0 });
+                        await db.query('INSERT INTO deposit SET id = ?, user_id = ?, amount = ?, reference_id = ?, verification = "approved"', [uuidv4(), user_id, response.data.data.amount, client_txn_id], async (err, result) => {
+                            if (err) {
+                                console.log(err);
+                                res.status(500).send('Error');
+                            } else {
+                                res.status(200).json({ message: 'Payment Successful', amount: response.data.data ? response.data.data.amount : 0 });
+                            }
+                        })
                     }
                 })
             } else {

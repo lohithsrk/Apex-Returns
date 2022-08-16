@@ -14,7 +14,6 @@ exports.loginGet = (req, res) => {
                     error: 'Failed to authenticate token'
                 });
             req.user = decoded;
-            console.log(decoded);
             res.json({
                 isLoggedIn: true,
                 user: { ...decoded }
@@ -161,7 +160,7 @@ exports.loginPost = async (req, res) => {
             })
         })
 
-        await db.query('SELECT apex_plans.*, investments.expired FROM investments, apex_plans WHERE user_id = ? AND investments.investment_id = apex_plans.id', [results[0].id], (err, results1) => {
+        await db.query('SELECT apex_plans.return_period, apex_plans.deposit_amount, apex_plans.daily_returns, investments.created_at ,investments.expired FROM investments, apex_plans WHERE user_id = ? AND investments.investment_id = apex_plans.id', [results[0].id], (err, results1) => {
             if (err) {
                 return res.status(500).json({
                     error: err
