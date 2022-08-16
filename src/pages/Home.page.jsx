@@ -42,6 +42,7 @@ const Home = () => {
 			verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
 				(res) => {
 					if (res.status === 200) {
+						console.log('GIII');
 						toast.success(res.data.message);
 						dispatch({
 							type: 'SET_USER',
