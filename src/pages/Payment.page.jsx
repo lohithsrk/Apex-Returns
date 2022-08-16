@@ -14,7 +14,7 @@ const Payment = () => {
 	// const [copyText, setCopyText] = useState('');
 	const [referenceID, setReferenceID] = useState('');
 	const { user } = useSelector((state) => ({ ...state.user }));
-
+	console.log(user);
 	// const location = useLocation();
 	const navigate = useNavigate();
 	// const { state } = location;
@@ -51,12 +51,12 @@ const Payment = () => {
 					<div className='flex items-center justify-center'>
 						<div className='p-2'>
 							<p>Apex</p>
-							<p>{user.user.total_apex > 0 ? user.user.total_apex : 0}</p>
+							<p>{user.total_apex > 0 ? user.total_apex : 0}</p>
 						</div>
 						<span className='w-[2px] block h-4 bg-white' />
 						<div className='p-2'>
 							<p>Balance</p>
-							<p>₹{user.user.amount > 0 ? user.user.amount : '0.00'}</p>
+							<p>₹{user.amount > 0 ? user.amount : '0.00'}</p>
 						</div>
 					</div>
 				</div>

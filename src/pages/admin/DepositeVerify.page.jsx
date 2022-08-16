@@ -46,9 +46,9 @@ const DepositVerify = () => {
 				</div>
 			</div>
 			<div className='p-2 pb-20'>
-				<div className='grid grid-cols-5 pb-2 border-b-2 border-[#5271ff]'>
+				<div className='grid grid-cols-4 pb-2 border-b-2 border-[#5271ff]'>
 					<p className='text-xs text-center font-semibold'>User ID</p>
-					<p className='text-xs text-center font-semibold'>Amount</p>
+					{/* <p className='text-xs text-center font-semibold'>Amount</p> */}
 					<p className='text-xs text-center font-semibold'>Reference ID</p>
 					<p className='text-xs text-center font-semibold'>Date</p>
 					<p className='text-xs text-center font-semibold'>Status</p>
@@ -62,17 +62,18 @@ const DepositVerify = () => {
 						})
 						.reverse()
 						.map((depositRequest, index) => {
+							console.log(depositRequest);
 							return (
 								<div
 									key={index}
-									className='grid grid-cols-5 pt-2 border-b-2 border-gray-300 pb-1'
+									className='grid grid-cols-4 pt-2 border-b-2 border-gray-300 pb-1'
 								>
 									<p className='text-xs text-center'>
 										{depositRequest.user_id}
 									</p>
-									<p className='text-xs text-center'>
+									{/* <p className='text-xs text-center'>
 										₹{depositRequest.amount}
-									</p>
+									</p> */}
 									<p className='text-xs text-center'>
 										{depositRequest.reference_id}
 									</p>
