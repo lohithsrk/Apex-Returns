@@ -41,7 +41,7 @@ const Home = () => {
 		if (searchParams.get('client_txn_id')&&searchParams.get('client_txn_id').length > 0) {
 			verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
 				(res) => {
-					if (res.status === 1) {
+					if (res.status === 200) {
 						toast.success(res.data);
 					} else {
 						toast.error(res.data);
