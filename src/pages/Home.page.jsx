@@ -36,7 +36,7 @@ const Home = () => {
 
 	useEffect(() => {
 		getApexPlans().then((res) => setApexPlans(res.data));
-		if (!count) {
+		if (count===0) {
 			searchParams.get('client_txn_id') &&
 				verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
 					(res) => {
