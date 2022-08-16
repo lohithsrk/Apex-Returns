@@ -38,9 +38,9 @@ exports.paymentPost = async (req, res) => {
 }
 
 exports.createDepositBackup = async (req, res) => {
-    const { user_id, reference_id } = req.body;
+    const { user_id, reference_id,amount } = req.body;
 
-    await db.query('INSERT INTO deposit SET id = ?, user_id = ?, reference_id = ?, amount = 0, verification = ?, created_at = ?', [uuidv4(), user_id, reference_id, amount, 'pending', new Date()], (err, result) => {
+    await db.query('INSERT INTO deposit SET id = ?, user_id = ?, reference_id = ?, amount = ?, verification = ?, created_at = ?', [uuidv4(), user_id, reference_id, amount, 'pending', new Date()], (err, result) => {
         if (err) {
             console.log(err);
             return res.status(500).json({
@@ -48,6 +48,7 @@ exports.createDepositBackup = async (req, res) => {
                 error: err
             });
         }
+        console.log('sdfsfds');
         return res.status(200).json({
             message: 'Success',
             data: result
