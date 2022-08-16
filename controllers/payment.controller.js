@@ -62,11 +62,12 @@ exports.verifyDeposit = async (req, res) => {
                         console.log(err);
                         res.status(500).send('Error');
                     } else {
-                        res.status(1).json('Payment Successful');
+                        console.log(response.data.data.status);
+                        res.status(200).json('Payment Successful');
                     }
                 })
             } else {
-                res.status(0).json('Paymet not completed')
+                res.status(500).json('Paymet not completed')
             }
         })
         .catch(function (error) {
