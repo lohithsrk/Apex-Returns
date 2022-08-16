@@ -41,20 +41,18 @@ const Home = () => {
 				(res) => {
 					if (res.status === 200) {
 						toast.success(res.data.message);
-						validateUser(user.token).then((resp) => {
-							dispatch({
-								type: 'SET_USER',
-								payload: {
-									token: user.token,
-									isLoggedIn: true,
-									user: {
-										...user.user,
-										total_apex: resp.data.user.total_apex + res.data.amount
-									}
+						dispatch({
+							type: 'SET_USER',
+							payload: {
+								token: user.token,
+								isLoggedIn: true,
+								user: {
+									...user.user,
+									total_apex: user.user.total_apex + res.data.amount
 								}
-							});
-							navigate('/');
+							}
 						});
+						navigate('/');
 					} else {
 						toast.error(res.data);
 					}
