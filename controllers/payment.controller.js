@@ -28,8 +28,7 @@ exports.paymentPost = async (req, res) => {
     };
 
     axios(config)
-        .then(function (response) {
-            console.log(response.data);
+        .then(async (response) => {
             res.json(response.data.data.payment_url);
         })
         .catch(function (error) {
@@ -37,21 +36,21 @@ exports.paymentPost = async (req, res) => {
         });
 }
 
-exports.createDepositBackup = async (req, res) => {
-    const { user_id, reference_id,amount } = req.body;
+// exports.createDepositBackup = async (req, res) => {
+//     const { user_id, reference_id,amount } = req.body;
 
-    await db.query('INSERT INTO deposit SET id = ?, user_id = ?, reference_id = ?, amount = ?, verification = ?, created_at = ?', [uuidv4(), user_id, reference_id, amount, 'pending', new Date()], (err, result) => {
-        if (err) {
-            console.log(err);
-            return res.status(500).json({
-                message: 'Error',
-                error: err
-            });
-        }
-        console.log('sdfsfds');
-        return res.status(200).json({
-            message: 'Success',
-            data: result
-        });
-    })
-}
+//     await db.query('INSERT INTO deposit SET id = ?, user_id = ?, reference_id = ?, amount = ?, verification = ?, created_at = ?', [uuidv4(), user_id, reference_id, amount, 'pending', new Date()], (err, result) => {
+//         if (err) {
+//             console.log(err);
+//             return res.status(500).json({
+//                 message: 'Error',
+//                 error: err
+//             });
+//         }
+//         console.log('sdfsfds');
+//         return res.status(200).json({
+//             message: 'Success',
+//             data: result
+//         });
+//     })
+// }
