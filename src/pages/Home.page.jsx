@@ -37,8 +37,11 @@ const Home = () => {
 		getApexPlans().then((res) => setApexPlans(res.data));
 	}, []);
 
-	if (searchParams.get('client_txn_id').length > 0) {
-		useEffect(() => {
+	useEffect(() => {
+		if (
+			searchParams.get('client_txn_id') &&
+			searchParams.get('client_txn_id').length > 0
+		) {
 			verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
 				(res) => {
 					if (res.status === 1) {
@@ -48,8 +51,8 @@ const Home = () => {
 					}
 				}
 			);
-		}, []);
-	}
+		}
+	}, []);
 
 	const percentage = (daily_returns, return_period, deposit_amount) =>
 		(daily_returns * return_period) / deposit_amount;
