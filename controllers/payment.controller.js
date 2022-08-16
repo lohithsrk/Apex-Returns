@@ -63,7 +63,7 @@ exports.verifyDeposit = async (req, res) => {
                         res.status(500).send('Error');
                     } else {
                         console.log(response.data.data.status);
-                        res.status(200).json('Payment Successful');
+                        res.status(200).json({ message: 'Payment Successful', amount: response.data.data ? response.data.data.amount : 0 });
                     }
                 })
             } else {
