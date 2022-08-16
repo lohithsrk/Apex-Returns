@@ -37,22 +37,20 @@ const Home = () => {
 		getApexPlans().then((res) => setApexPlans(res.data));
 	}, []);
 
-	useEffect(() => {
-		if (
-			searchParams.get('client_txn_id') &&
-			searchParams.get('client_txn_id').length > 0
-		) {
-			verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
-				(res) => {
-					if (res.status === 1) {
-						toast.success(res.data);
-					} else {
-						toast.error(res.data);
-					}
+	if (
+		searchParams.get('client_txn_id') &&
+		searchParams.get('client_txn_id').length > 0
+	) {
+		verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
+			(res) => {
+				if (res.status === 1) {
+					toast.success(res.data);
+				} else {
+					toast.error(res.data);
 				}
-			);
-		}
-	}, []);
+			}
+		);
+	}
 
 	const percentage = (daily_returns, return_period, deposit_amount) =>
 		(daily_returns * return_period) / deposit_amount;
