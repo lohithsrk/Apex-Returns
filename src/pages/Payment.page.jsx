@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import TextField from '@mui/material/TextField';
+import { useSelector } from 'react-redux';
 
 import { createDepositBackup } from '../axios/payment.axios';
 
@@ -12,11 +13,12 @@ import LOGO from '../assets/logo_full_white.png';
 const Payment = () => {
 	// const [copyText, setCopyText] = useState('');
 	const [referenceID, setReferenceID] = useState('');
+	const { user } = useSelector((state) => ({ ...state.user }));
 
-	const location = useLocation();
+	// const location = useLocation();
 	const navigate = useNavigate();
-	const { state } = location;
-	const { UPI_ID, qr, paymentLink, user, amount } = state;
+	// const { state } = location;
+	// const { user, amount } = state;
 
 	// const copy_UPI_ID = () => {
 	// setCopyText(UPI_ID);
@@ -25,7 +27,7 @@ const Payment = () => {
 	// };
 
 	const handleSubmit = async (e) => {
-		await createDepositBackup(user.user.id, amount, referenceID).then((res) => {
+		await createDepositBackup(user.user.id, referenceID).then((res) => {
 			if (res.data.message === 'Success') {
 				toast.success(
 					'Payment waiting for confirmation. Your APEX will be added to your account after confirmation.'
@@ -58,9 +60,9 @@ const Payment = () => {
 						</div>
 					</div>
 				</div>
-				<div className='pt-12 flex flex-col items-center text-center'>
-					{/* <img src={qr} alt='QR' className='w-44 h-44' /> */}
-					{/* <div
+				{/* <div className='pt-12 flex flex-col items-center text-center'> */}
+				{/* <img src={qr} alt='QR' className='w-44 h-44' /> */}
+				{/* <div
 						className='flex 
 				'
 					>
@@ -69,15 +71,15 @@ const Payment = () => {
 							{!copyText ? 'Copy' : 'Copied'}
 						</h2>
 					</div> */}
-					<div
+				{/* <div
 						className={`${
 							window.innerWidth > 800 ? 'hidden' : 'block'
 						} bg-gradient-to-l from-cyan-500 to-[#5271ff] w-full rounded-lg mt-3 py-2 text-white`}
 						onClick={() => (window.location = paymentLink)}
 					>
 						OPEN UPI APP
-					</div>
-				</div>
+					</div> */}
+				{/* </div> */}
 				<div className=' flex-col justify-start items-center mt-3 '>
 					<h2 className='text-center'>Enter the bill reference id</h2>
 					{/* <input
