@@ -14,6 +14,7 @@ import './styles.css';
 import { getApexPlans } from '../axios/apexPlans.axios';
 import { investmentPost } from '../axios/investments.axios';
 import { verifyDeposit } from '../axios/payment.axios';
+import { validateUser } from '../axios/auth.axios';
 
 import LOGO from '../assets/logo_full_white.png';
 import Slide1 from '../assets/slide1.svg';
@@ -40,20 +41,23 @@ const Home = () => {
 				(res) => {
 					if (res.status === 200) {
 						toast.success(res.data.message);
-						dispatch({
-							type: 'SET_USER',
-							payload: {
-								...user.user,
-								total_apex: user.user.total_apex + res.data.amount
-							}
+						validateUser(user.token).then((resp) => {
+							dispatch({
+								type: 'SET_USER',
+								payload: {
+									...user.user,
+									total_apex: resp.data.user.total_apex + res.data.amount
+								}
+							});
 						});
+
 						navigate('/');
 					} else {
 						toast.error(res.data);
 					}
 				}
 			);
-	}, []);
+	}, [searchParams, user.user.id, user.token, dispatch, navigate, user.user]);
 
 	const percentage = (daily_returns, return_period, deposit_amount) =>
 		(daily_returns * return_period) / deposit_amount;
