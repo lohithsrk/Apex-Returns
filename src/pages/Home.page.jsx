@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Helmet from 'react-helmet';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 
@@ -13,6 +13,7 @@ import './styles.css';
 
 import { getApexPlans } from '../axios/apexPlans.axios';
 import { investmentPost } from '../axios/investments.axios';
+import { verifyDeposit } from '../axios/payment.axios';
 
 import LOGO from '../assets/logo_full_white.png';
 import Slide1 from '../assets/slide1.svg';
@@ -26,12 +27,22 @@ const Home = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	const [searchParams] = useSearchParams();
+
 	const [apexPlans, setApexPlans] = useState([]);
 	const [isConfirmOpened, setIsConfirmOpened] = useState(false);
 	const [choosenPlan, setChoosenPlan] = useState({});
 
 	useEffect(() => {
 		getApexPlans().then((res) => setApexPlans(res.data));
+	}, []);
+
+	useEffect(() => {
+		verifyDeposit(searchParams.get('client_txn_id'), user.user.id).then(
+			(res) => {
+				toast.success(res.data);
+			}
+		);
 	}, []);
 
 	const percentage = (daily_returns, return_period, deposit_amount) =>
