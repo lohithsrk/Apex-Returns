@@ -57,16 +57,16 @@ exports.verifyDeposit = async (req, res) => {
     axios(config)
         .then(async (response) => {
             if (response.data.data.status == 'success') {
-                await db.query('UPDATE user SET amount = amount + ? WHERE id = ?', [response.data.data.amount, req.body.user_id], (err, result) => {
+                await db.query('UPDATE user SET total_apex = total_apex + ? WHERE id = ?', [response.data.data.amount, req.body.user_id], (err, result) => {
                     if (err) {
                         console.log(err);
                         res.status(500).send('Error');
                     } else {
-                       res.json('Payment Successful');
+                        res.status(1).json('Payment Successful');
                     }
                 })
             } else {
-                res.json('Paymet not completed')
+                res.status(0).json('Paymet not completed')
             }
         })
         .catch(function (error) {
