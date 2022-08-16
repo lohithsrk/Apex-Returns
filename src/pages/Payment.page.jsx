@@ -108,7 +108,7 @@ const Payment = () => {
 						}}
 					/>
 					<button
-						className='bg-gradient-to-l from-cyan-500 to-[#5271ff] w-full rounded-lg mt-3 py-2'
+						className='bg-gradient-to-l from-cyan-500 to-[#5271ff] w-full rounded-lg mt-3 py-2 text-white'
 						onClick={handleSubmit}
 					>
 						Confirm
