@@ -15,7 +15,7 @@ exports.paymentPost = async (req, res) => {
         "customer_name": `${user_id}`,
         "customer_email": `${user_id}@gmail.com`,
         "customer_mobile": `${user_id}`,
-        "redirect_url": "https://apexreturns.com/deposit/apex/payment",
+        "redirect_url": "https://apexreturns.com/",
     });
 
     var config = {
@@ -36,21 +36,42 @@ exports.paymentPost = async (req, res) => {
         });
 }
 
-// exports.createDepositBackup = async (req, res) => {
-//     const { user_id, reference_id,amount } = req.body;
+exports.verifyDeposit = async (req, res) => {
+    const { client_txn_id, txn_id, user_id } = req.body;
+    var axios = require('axios');
+    var data = JSON.stringify({
+        "key": `${process.env.PAYMENT_KEY}`,
+        "client_txn_id": `${client_txn_id}`,
+        "txn_date": `${new Date().getDate()}-${(new Date().getMonth()).toLocaleString().length === 1 ? '0' + (parseInt(new Date().getMonth()) + 1) : (parseInt(new Date().getMonth()) + 1)}-${new Date().getFullYear()}`
+    });
 
-//     await db.query('INSERT INTO deposit SET id = ?, user_id = ?, reference_id = ?, amount = ?, verification = ?, created_at = ?', [uuidv4(), user_id, reference_id, amount, 'pending', new Date()], (err, result) => {
-//         if (err) {
-//             console.log(err);
-//             return res.status(500).json({
-//                 message: 'Error',
-//                 error: err
-//             });
-//         }
-//         console.log('sdfsfds');
-//         return res.status(200).json({
-//             message: 'Success',
-//             data: result
-//         });
-//     })
-// }
+    var config = {
+        method: 'post',
+        url: 'https://merchant.upigateway.com/api/check_order_status',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: data
+    };
+
+    axios(config)
+        .then(async (response) => {
+            if (response.data.data.status == 'success') {
+                await db.query('UPDATE user SET amount = amount + ? WHERE id = ?', [response.data.data.amount, req.body.user_id], (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(500).send('Error');
+                    } else {
+                       res.json('Payment Successful');
+                    }
+                })
+            } else {
+                res.json('Paymet not completed')
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+
+}
