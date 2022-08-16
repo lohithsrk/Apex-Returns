@@ -14,7 +14,6 @@ const Payment = () => {
 	// const [copyText, setCopyText] = useState('');
 	const [referenceID, setReferenceID] = useState('');
 	const { user } = useSelector((state) => ({ ...state.user }));
-	console.log(user);
 	// const location = useLocation();
 	const navigate = useNavigate();
 	// const { state } = location;

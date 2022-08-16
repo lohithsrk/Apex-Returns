@@ -31,7 +31,7 @@ const Orders = () => {
 				<div className='flex justify-between items-center text-xs text-center h-16 shadow-lg bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white border-b-2 border-white'>
 					<img src={LOGO} alt='APEX RETURNS' className='w-36 ml-2' />
 					<div className='flex justify-center items-center'>
-						<div className='p-2'>
+						{/* <div className='p-2'>
 							<p>
 								Obtained <br /> Already
 							</p>
@@ -42,7 +42,7 @@ const Orders = () => {
 									: 0}
 							</p>
 						</div>
-						<span className='w-[2px] block h-4 bg-gray-600' />
+						<span className='w-[2px] block h-4 bg-gray-600' /> */}
 						<div className='p-2'>
 							<p>
 								Current <br /> Daily Returns
@@ -76,7 +76,7 @@ const Orders = () => {
 				</div>
 				<div className='flex justify-between items-center p-2'>
 					<div className='text-lg'>Orders</div>
-					<select
+					{/* <select
 						defaultValue={status}
 						className='bg-[#5271ff] text-white p-2 rounded'
 						onChange={(e) => {
@@ -87,29 +87,27 @@ const Orders = () => {
 						<option value='pending'>Pending</option>
 						<option value='approved'>Approved</option>
 						<option value='rejected'>Rejected</option>
-					</select>
+					</select> */}
 				</div>
 				<div className='pb-20'>
+					<div className='grid grid-cols-2 text-center p-2 text-sm border-b-[1px]'>
+						<span className='text-xs font-semibold'>Bought</span>
+						<span className='text-xs font-semibold'>Date</span>
+					</div>
 					{orders.length > 0 ? (
 						orders.map((order, index) => {
 							return (
 								<div
-									className='flex justify-between p-2 text-sm border-b-[1px]'
+									className='grid grid-cols-2 p-2 text-sm border-b-[1px] text-center'
 									key={index}
 								>
+									<div>{order.amount > 0 ? order.amount : 0} Apex</div>
 									<div>
-										<span className='text-xs font-semibold'>Bought</span>
-										<br />
-										{order.amount > 0 ? order.amount : 0} Apex
-									</div>
-									<div>
-										<span className='text-xs font-semibold'>Date</span>
-										<br />
 										{new Date(order.created_at).toLocaleString().split(',')[0]}
 										<br />
 										{new Date(order.created_at).toLocaleString().split(',')[1]}
 									</div>
-									<div
+									{/* <div
 										className={`${
 											status === 'pending'
 												? 'text-yellow-400'
@@ -123,7 +121,7 @@ const Orders = () => {
 										</span>
 										<br />
 										{order.verification}
-									</div>
+									</div> */}
 								</div>
 							);
 						})

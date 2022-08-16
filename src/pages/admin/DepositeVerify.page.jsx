@@ -62,7 +62,6 @@ const DepositVerify = () => {
 						})
 						.reverse()
 						.map((depositRequest, index) => {
-							console.log(depositRequest);
 							return (
 								<div
 									key={index}
