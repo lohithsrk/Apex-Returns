@@ -14,6 +14,7 @@ exports.loginGet = (req, res) => {
                     error: 'Failed to authenticate token'
                 });
             req.user = decoded;
+            console.log(decoded);
             res.json({
                 isLoggedIn: true,
                 user: { ...decoded }
@@ -58,7 +59,8 @@ exports.loginPost = async (req, res) => {
             email: results[0].email,
             role: results[0].role,
             created_at: results[0].created_at,
-            updated_at: results[0].updated_at
+            updated_at: results[0].updated_at,
+            total_apex: results[0].total_apex
 
         }, process.env.SECRET, {
             expiresIn: 3000
