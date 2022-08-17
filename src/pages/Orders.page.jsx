@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Helmet from 'react-helmet';
 
-import { ordersGet } from '../axios/orders.route';
+import { ordersGet } from '../axios/orders.axios';
 
 import LOGO from '../assets/logo_full_white.png';
 
 const Orders = () => {
 	const [status, setStatus] = useState('pending');
 	const [orders, setOrders] = useState([]);
+	const [currentArray, setCurrentArray] = useState('deposit');
 
 	const { user } = useSelector((state) => ({ ...state }));
 
@@ -76,18 +77,16 @@ const Orders = () => {
 				</div>
 				<div className='flex justify-between items-center p-2'>
 					<div className='text-lg'>Orders</div>
-					{/* <select
-						defaultValue={status}
+					<select
+						defaultValue={currentArray}
 						className='bg-[#5271ff] text-white p-2 rounded'
 						onChange={(e) => {
-							setStatus(e.target.value);
-							updateOrders(e.target.value, user.user.id);
+							setCurrentArray(e.target.value);
 						}}
 					>
-						<option value='pending'>Pending</option>
-						<option value='approved'>Approved</option>
-						<option value='rejected'>Rejected</option>
-					</select> */}
+						<option value='deposit'>Deposit</option>
+						<option value='withdraw'>Withdraw</option>
+					</select>
 				</div>
 				<div className='pb-20'>
 					<div className='grid grid-cols-2 text-center p-2 text-sm border-b-[1px]'>
@@ -95,7 +94,7 @@ const Orders = () => {
 						<span className='text-xs font-semibold'>Date</span>
 					</div>
 					{orders.length > 0 ? (
-						orders.map((order, index) => {
+						orders[currentArray].map((order, index) => {
 							return (
 								<div
 									className='grid grid-cols-2 p-2 text-sm border-b-[1px] text-center'
@@ -127,7 +126,7 @@ const Orders = () => {
 						})
 					) : (
 						<div className='p-3 text-center border-b-[1px]'>
-							No orders found
+							No {currentArray} found
 						</div>
 					)}
 				</div>
