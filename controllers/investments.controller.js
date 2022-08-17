@@ -58,7 +58,7 @@ exports.investmentPost = async (req, res) => {
                         }
 
 
-                        await db.query('SELECT apex_plans.* FROM investments, apex_plans WHERE user_id = ? AND investments.investment_id = apex_plans.id', [req.params.user_id], (err, results1) => {
+                        await db.query('SELECT apex_plans.return_period, apex_plans.deposit_amount, apex_plans.daily_returns, investments.created_at FROM investments, apex_plans WHERE user_id = ? AND investments.investment_id = apex_plans.id', [req.params.user_id], (err, results1) => {
                             if (err) {
                                 return res.status(500).json({
                                     error: err
@@ -87,9 +87,9 @@ exports.investmentPost = async (req, res) => {
                                 } else {
                                     let dateDifference = now - currentDate;
                                     const days = dateDifference / (1000 * 60 * 60 * 24)
-                                    console.log(days);
                                     currentDailyReturns += investment.deposit_amount * investment.daily_returns / 100;
-                                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days - 1);
+                                    console.log(currentDailyReturns);
+                                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days > 1 ? days - 1 : days);
                                 }
                             });
                             return res.json({

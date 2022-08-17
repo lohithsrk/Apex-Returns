@@ -143,7 +143,7 @@ exports.loginPost = async (req, res) => {
                                     let dateDifference = endDate - (now - currentDate);
                                     const days = dateDifference / (1000 * 60 * 60 * 24)
 
-                                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days - 1);
+                                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) *(days > 1 ? days - 1 : days);
                                 }
                             });
                             await db.query('UPDATE user SET amount = amount - ? WHERE id = ?', [total - amountObtainedAlready, phone_number], (err, resu) => {
@@ -179,7 +179,8 @@ exports.loginPost = async (req, res) => {
                     let dateDifference = now - currentDate;
                     const days = dateDifference / (1000 * 60 * 60 * 24)
                     currentDailyReturns += investment.deposit_amount * investment.daily_returns / 100;
-                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days - 1);
+                    amountObtainedAlready += (investment.deposit_amount * (investment.daily_returns / 100)) * (days > 1 ? days - 1 : days);
+                    console.log(amountObtainedAlready);
                 }
             });
             return res.json({
