@@ -31,7 +31,7 @@ const Orders = () => {
 				<div className='flex justify-between items-center text-xs text-center h-16 shadow-lg bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white border-b-2 border-white'>
 					<img src={LOGO} alt='APEX RETURNS' className='w-36 ml-2' />
 					<div className='flex justify-center items-center'>
-						{/* <div className='p-2'>
+						<div className='p-2'>
 							<p>
 								Obtained <br /> Already
 							</p>
@@ -42,7 +42,7 @@ const Orders = () => {
 									: 0}
 							</p>
 						</div>
-						<span className='w-[2px] block h-4 bg-gray-600' /> */}
+						<span className='w-[2px] block h-4 bg-gray-600' />
 						<div className='p-2'>
 							<p>
 								Current <br /> Daily Returns
