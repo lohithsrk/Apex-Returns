@@ -87,9 +87,10 @@ const Orders = () => {
 					</select>
 				</div>
 				<div className='pb-20'>
-					<div className='grid grid-cols-2 text-center p-2 text-sm border-b-[1px]'>
-						<span className='text-xs font-semibold'>Bought</span>
-						<span className='text-xs font-semibold'>Date</span>
+					<div className='grid grid-cols-3 text-center p-2 text-sm border-b-[1px]'>
+						<span className='text-xs font-semibold'>Deposit amount</span>
+						<span className='text-xs font-semibold'>Status</span>
+						<span className='text-xs font-semibold'>Date and Time</span>
 					</div>
 					{currentArray === 'deposit' &&
 						(deposit.length > 0 ? (
@@ -104,7 +105,11 @@ const Orders = () => {
 					{currentArray === 'withdraw' &&
 						(withdraw.length > 0 ? (
 							withdraw.map((order, index) => (
-								<EachOrder order={order} key={index} />
+								<EachOrder
+									order={order}
+									key={index}
+									currentArray={currentArray}
+								/>
 							))
 						) : (
 							<div className='p-3 text-center border-b-[1px]'>
@@ -117,12 +122,17 @@ const Orders = () => {
 	);
 };
 
-const EachOrder = ({ order }) => {
+const EachOrder = ({ order, currentArray }) => {
+	const date = new Date(order.created_at).toLocaleString().split(',')[0];
 	return (
-		<div className='grid grid-cols-2 p-2 text-sm border-b-[1px] text-center'>
-			<div>{order.amount > 0 ? order.amount : 0} Apex</div>
+		<div className='grid grid-cols-3 p-2 text-sm border-b-[1px] text-center'>
+			<div>₹{order.amount > 0 ? order.amount : 0}</div>
+			{currentArray === 'deposit' && <div>Successful</div>}
+			{currentArray === 'withdraw' && (
+				<div>{order.approved === 'approved' ? 'Successful' : 'Waiting'}</div>
+			)}
 			<div>
-				{new Date(order.created_at).toLocaleString().split(',')[0]}
+				{`${date.split('/')[1]}/${date.split('/')[0]}/${date.split('/')[2]}`}
 				<br />
 				{new Date(order.created_at).toLocaleString().split(',')[1]}
 			</div>
