@@ -89,7 +89,7 @@ const Orders = () => {
 						<span className='text-xs font-semibold'>Bought</span>
 						<span className='text-xs font-semibold'>Date</span>
 					</div>
-					{orders[currentArray].length > 0 ? (
+					{orders[currentArray] && orders[currentArray].length > 0 ? (
 						orders[currentArray].map((order, index) => {
 							return (
 								<div
