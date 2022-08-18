@@ -8,16 +8,18 @@ import { ordersGet } from '../axios/orders.axios';
 import LOGO from '../assets/logo_full_white.png';
 
 const Orders = () => {
-	const [orders, setOrders] = useState([]);
+	const [deposit, setDeposit] = useState([]);
+	const [withdraw, setWithdraw] = useState([]);
 	const [currentArray, setCurrentArray] = useState('deposit');
 
 	const { user } = useSelector((state) => ({ ...state }));
 
 	useEffect(() => {
 		ordersGet(user.user.id).then((res) => {
-			setOrders(res.data);
+			setDeposit(res.data.deposit);
+			setWithdraw(res.data.withdraw);
 		});
-	}, []);
+	}, [user.user.id]);
 
 	return (
 		<>
@@ -89,46 +91,57 @@ const Orders = () => {
 						<span className='text-xs font-semibold'>Bought</span>
 						<span className='text-xs font-semibold'>Date</span>
 					</div>
-					{orders && orders[currentArray].length > 0 ? (
-						orders[currentArray].map((order, index) => {
-							return (
-								<div
-									className='grid grid-cols-2 p-2 text-sm border-b-[1px] text-center'
-									key={index}
-								>
-									<div>{order.amount > 0 ? order.amount : 0} Apex</div>
-									<div>
-										{new Date(order.created_at).toLocaleString().split(',')[0]}
-										<br />
-										{new Date(order.created_at).toLocaleString().split(',')[1]}
-									</div>
-									{/* <div
-										className={`${
-											status === 'pending'
-												? 'text-yellow-400'
-												: status === 'approved'
-												? 'text-green-600'
-												: 'text-red-600'
-										}`}
-									>
-										<span className='text-xs font-semibold text-black'>
-											Status
-										</span>
-										<br />
-										{order.verification}
-									</div> */}
-								</div>
-							);
-						})
-					) : (
-						<div className='p-3 text-center border-b-[1px]'>
-							No {currentArray} found
-						</div>
-					)}
+					{currentArray === 'deposit' &&
+						(deposit.length > 0 ? (
+							deposit.map((order, index) => (
+								<EachOrder order={order} key={index} />
+							))
+						) : (
+							<div className='p-3 text-center border-b-[1px]'>
+								No {currentArray} found
+							</div>
+						))}
+					{currentArray === 'withdraw' &&
+						(withdraw.length > 0 ? (
+							withdraw.map((order, index) => (
+								<EachOrder order={order} key={index} />
+							))
+						) : (
+							<div className='p-3 text-center border-b-[1px]'>
+								No {currentArray} found
+							</div>
+						))}
 				</div>
 			</div>
 		</>
 	);
 };
 
+const EachOrder = ({ order }) => {
+	return (
+		<div className='grid grid-cols-2 p-2 text-sm border-b-[1px] text-center'>
+			<div>{order.amount > 0 ? order.amount : 0} Apex</div>
+			<div>
+				{new Date(order.created_at).toLocaleString().split(',')[0]}
+				<br />
+				{new Date(order.created_at).toLocaleString().split(',')[1]}
+			</div>
+			{/* <div
+	className={`${
+		status === 'pending'
+			? 'text-yellow-400'
+			: status === 'approved'
+			? 'text-green-600'
+			: 'text-red-600'
+	}`}
+>
+	<span className='text-xs font-semibold text-black'>
+		Status
+	</span>
+	<br />
+	{order.verification}
+</div> */}
+		</div>
+	);
+};
 export default Orders;
