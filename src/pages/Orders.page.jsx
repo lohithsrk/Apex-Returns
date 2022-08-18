@@ -8,20 +8,16 @@ import { ordersGet } from '../axios/orders.axios';
 import LOGO from '../assets/logo_full_white.png';
 
 const Orders = () => {
-	const [status, setStatus] = useState('pending');
 	const [orders, setOrders] = useState([]);
 	const [currentArray, setCurrentArray] = useState('deposit');
 
 	const { user } = useSelector((state) => ({ ...state }));
 
-	const updateOrders = async (status) =>
-		await ordersGet(status, user.user.id).then((res) => {
+	useEffect(() => {
+		ordersGet(user.user.id).then((res) => {
 			setOrders(res.data);
 		});
-
-	useEffect(() => {
-		updateOrders(status);
-	}, [status]);
+	}, []);
 
 	return (
 		<>
@@ -93,7 +89,7 @@ const Orders = () => {
 						<span className='text-xs font-semibold'>Bought</span>
 						<span className='text-xs font-semibold'>Date</span>
 					</div>
-					{orders.length > 0 ? (
+					{orders[currentArray].length > 0 ? (
 						orders[currentArray].map((order, index) => {
 							return (
 								<div
