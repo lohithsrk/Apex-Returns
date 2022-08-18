@@ -62,7 +62,7 @@ exports.verifyDeposit = async (req, res) => {
                         console.log(err);
                         res.status(500).send('Error');
                     } else {
-                        await db.query('INSERT INTO deposit SET id = ?, user_id = ?, amount = ?, reference_id = ?, verification = "approved"', [uuidv4(), user_id, response.data.data.amount, client_txn_id], async (err, result) => {
+                        await db.query('INSERT INTO deposit SET id = ?, user_id = ?, amount = ?, reference_id = ?, verification = "approved", created_at = ?', [uuidv4(), user_id, response.data.data.amount, client_txn_id, new Date()], async (err, result) => {
                             if (err) {
                                 console.log(err);
                                 res.status(500).send('Error');
