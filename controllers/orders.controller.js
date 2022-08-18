@@ -1,7 +1,7 @@
 const db = require('../database');
 
 exports.ordersGet = async (req, res) => {
-    await db.query('SELECT * FROM deposit where verification = ? AND user_id = ?', [req.body.status, req.body.user_id], async (err, rows) => {
+    await db.query('SELECT * FROM deposit WHERE user_id = ?', [req.body.user_id], async (err, rows) => {
         if (err) {
             res.status(500).send(err);
         }
