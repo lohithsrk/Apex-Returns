@@ -95,7 +95,11 @@ const Orders = () => {
 					{currentArray === 'deposit' &&
 						(deposit.length > 0 ? (
 							deposit.map((order, index) => (
-								<EachOrder order={order} key={index} />
+								<EachOrder
+									order={order}
+									key={index}
+									currentArray={currentArray}
+								/>
 							))
 						) : (
 							<div className='p-3 text-center border-b-[1px]'>
