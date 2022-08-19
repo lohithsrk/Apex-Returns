@@ -80,7 +80,7 @@ const Home = () => {
 					<span className='w-[2px] block h-4 bg-white' />
 					<div className='p-2'>
 						<p>Balance</p>
-						<p>₹{user.user.amount > 0 ? user.user.amount : '0.00'}</p>
+						<p>₹{user.user.amount > 0 ? user.user.amount.toFixed(2) : '0.00'}</p>
 					</div>
 				</div>
 			</div>

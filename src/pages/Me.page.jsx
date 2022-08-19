@@ -27,10 +27,21 @@ const Me = () => {
 				<title>ME | APEX RETURNS</title>
 			</Helmet>
 			<div>
-				<div className='w-screen bg-gray-600 p-2 h-16 bg-gradient-to-l from-cyan-500 to-[#5271ff] border-b-2 border-white'>
-					<img src={LOGO_FULL} alt='APEX RETURNS' className='w-36' />
+			<div className='flex justify-between items-center text-xs text-center h-16 bg-gradient-to-l from-cyan-500 to-[#5271ff] text-white'>
+				<img src={LOGO_FULL} alt='APEX RETURNS' className='w-36 ml-2' />
+				<div className='flex items-center justify-center'>
+					<div className='p-2'>
+						<p>Apex</p>
+						<p>{user.user.total_apex > 0 ? user.user.total_apex : 0}</p>
+					</div>
+					<span className='w-[2px] block h-4 bg-white'  />
+					<div className='p-2'>
+						<p>Balance</p>
+						<p>₹{user.user.amount > 0 ? user.user.amount.toFixed(2) : '0.00'}</p>
+					</div>
 				</div>
-				<div className='bg-gradient-to-l from-cyan-500 to-[#5271ff] flex justify-end px-2 py-1'>
+			</div>
+				<div className='bg-gradient-to-l from-cyan-500 to-[#5271ff] flex justify-end px-2 py-1 mt-[1px]'>
 					<p className='inline text-white text-sm'>My ID: {user.user.id}</p>
 				</div>
 				<div className='grid grid-cols-3'>
