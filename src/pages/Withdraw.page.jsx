@@ -109,7 +109,6 @@ const Withdraw = () => {
 							className='border-b-[2px] border-white w-2/5 outline-none p-2 pb-1 text-white font-medium bg-transparent max-w-prose mb-5 text-center placeholder:text-white placeholder:text-opacity-50'
 							placeholder='Account Number'
 							value={accountNum}
-							onChange={(e) => setAccountNum(e.target.value)}
 							onInput={(e) => {
 								setAccountNum(e.target.value.replace(/[^0-9]/g, ''));
 							}}
