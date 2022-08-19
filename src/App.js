@@ -81,7 +81,7 @@ const App = () => {
 
         <Route path="/login" element={<Auth />} />
         <Route path="/signup" exact element={<Auth />} />
-        <Route path="*" exact element={<p>404</p>} />
+        <Route path="*" exact element={<Auth />} />
       </Routes>
     </div >
   )

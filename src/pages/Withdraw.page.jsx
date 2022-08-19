@@ -31,10 +31,16 @@ const Withdraw = () => {
 						);
 						setAmount(0);
 						setUpiInput('');
+						setName('');
+						setIFSC('');
+						setAccountNum('');
 					} else {
 						toast.error('Withdrawal failed');
 						setAmount(0);
 						setUpiInput('');
+						setName('');
+						setIFSC('');
+						setAccountNum('');
 					}
 				})
 				.catch((err) => {
@@ -107,6 +113,8 @@ const Withdraw = () => {
 							onInput={(e) => {
 								setAccountNum(e.target.value.replace(/[^0-9]/g, ''));
 							}}
+							maxLength={20}
+							minLength={10}
 						/>
 						<p className='text-white text-xs'>
 							Withdrawal fee and tax 8% applicable
