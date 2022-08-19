@@ -14,20 +14,20 @@ const NavbarMobile = () => {
 				? 0
 				: location.pathname === '/orders'
 				? 1
-				: location.pathname === '/deposite'
+				: location.pathname === '/deposit'
 				? 2
-				: location.pathname === '/team'
+				: location.pathname === '/plans'
 				? 3
 				: location.pathname === '/me'
 				? 4
-				: 0
+				: 50
 	});
 	const circlePosition = Math.round(window.innerWidth / 50 / 10) * 10;
 
 	return (
 		<div className='fixed bg-white bottom-0 left-0 right-0 shadow-[0_-2px_5px_rgba(0,0,0,0.25)] py-2 z-50'>
 			<div
-				className={`rounded-full w-11 h-11 absolute -z-10  -translate-x-1/2 translate-y-3/4 bottom-[5.2rem] bg-blue-400 drop-shadow-[0_-2px_5px_rgba(0,0,0,0.25)]`}
+				className={`rounded-full w-11 h-11 absolute -z-10  -translate-x-1/2 translate-y-3/4 bottom-[5.2rem] bg-gradient-to-l from-cyan-500 to-[#5271ff] drop-shadow-[0_-2px_5px_rgba(0,0,0,0.25)]`}
 				style={{
 					left: `${circlePosition + selected.index * 20}%`,
 					transition: 'left 0.2s ease-out'
@@ -69,7 +69,7 @@ const NavbarMobile = () => {
 								<p
 									className={`text-center ${
 										matched
-											? 'translate-y-2/4 text-md text-blue-400'
+											? 'translate-y-2/4 text-md text-[#5271ff]'
 											: 'text-sm text-[#9e9e9e]'
 									}`}
 									style={{
@@ -103,20 +103,18 @@ const navItems = [
 		fillIcon: 'https://img.icons8.com/material-rounded/48/ffffff/paid-bill.png'
 	},
 	{
-		name: 'Deposite',
-		link: '/deposite',
+		name: 'deposit',
+		link: '/deposit',
 		outlineIcon:
 			'https://img.icons8.com/fluency-systems-regular/48/9e9e9e/quick-mode-on.png',
 		fillIcon:
 			'https://img.icons8.com/ios-filled/50/ffffff/quick-mode-on--v1.png'
 	},
 	{
-		name: 'Team',
-		link: '/team',
-		outlineIcon:
-			'https://img.icons8.com/fluency-systems-regular/48/9e9e9e/commercial-development-management.png',
-		fillIcon:
-			'https://img.icons8.com/fluency-systems-filled/48/ffffff/commercial-development-management.png'
+		name: 'Plans',
+		link: '/plans',
+		outlineIcon: 'https://img.icons8.com/ios-glyphs/60/9e9e9e/money--v1.png',
+		fillIcon: 'https://img.icons8.com/ios-glyphs/60/ffffff/money--v1.png'
 	},
 	{
 		name: 'Me',

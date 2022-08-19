@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8080/api';
-// const BASE_URL = 'https://apexreturnsserver.herokuapp.com/api';
+import { BASE_URL } from '../utils/common.util';
 
 export const login = async (phone_number, password) =>
     await axios.post(`${BASE_URL}/login`, { phone_number, password })
 
-export const signup = async (phone_number, password) =>
-    await axios.post(`${BASE_URL}/signup`, { phone_number, password })
+export const signup = async (phone_number, password, referalID) =>
+    await axios.post(`${BASE_URL}/signup`, { phone_number, password, referalID })
 
 export const validateUser = async (token) =>
     await axios.get(`${BASE_URL}/login`, { headers: { "x-access-token": token } })

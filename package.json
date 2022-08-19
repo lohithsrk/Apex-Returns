@@ -1,22 +1,23 @@
 {
-	"name": "apexreturns.com",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"prod": "git pull origin prod && cd client && npm run build && cd ..",
-		"start": "cd server && node server.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/lohithsrk/Apex-Returns.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/lohithsrk/Apex-Returns/issues"
-	},
-	"homepage": "https://github.com/lohithsrk/Apex-Returns#readme"
+  "name": "apexreturns.com",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "git pull origin prod && cd client && npm run build && cd ..",
+    "start": "cd server && node server.js",
+    "git": "cd client && npm run git-client && cd ../server && npm run git-server && cd .."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lohithsrk/Apex-Returns.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lohithsrk/Apex-Returns/issues"
+  },
+  "homepage": "https://github.com/lohithsrk/Apex-Returns#readme",
+  "description": ""
 }

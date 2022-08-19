@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useLocation, Outlet } from 'react-router-dom';
 
@@ -19,7 +19,6 @@ const UserRoute = () => {
 			validateUser(user.token)
 				.then((res) => {
 					if (!res.data.isLoggedIn) {
-						console.log('User not logged in');
 						dispatch({ type: 'SET_USER', payload: null });
 						toast.success('Please login to continue');
 						navigate('/login');
@@ -37,14 +36,13 @@ const UserRoute = () => {
 		}
 	}, [dispatch, user, location.pathname, navigate]);
 
-	return (
-		user &&
-		user.token.length && (
-			<>
-				<NavbarMobile />
-				<Outlet />
-			</>
-		)
+	return user && user.token.length ? (
+		<>
+			<NavbarMobile />
+			<Outlet />
+		</>
+	) : (
+		<Navigate to='login' />
 	);
 };
 
