@@ -219,7 +219,7 @@ exports.loginPost = async (req, res) => {
                         let dateDifference = now - currentDate;
                         const days = dateDifference / (1000 * 60 * 60 * 24)
                         currentDailyReturns += result.deposit_amount * result.daily_returns / 100;
-                        amountObtainedAlready += (result.deposit_amount * (result.daily_returns / 100)) * (days > 1 ? days - 1 : days);
+                        amountObtainedAlready += (result.deposit_amount * (result.daily_returns / 100)) * (days > 1 ? days : days);
                         amount += amountObtainedAlready
                     }
                 } else {
