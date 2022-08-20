@@ -88,7 +88,7 @@ const Orders = () => {
 				</div>
 				<div className='pb-20'>
 					<div className='grid grid-cols-3 text-center p-2 text-sm border-b-[1px]'>
-						<span className='text-xs font-semibold'>Deposit amount</span>
+						<span className='text-xs font-semibold'>{currentArray} amount</span>
 						<span className='text-xs font-semibold'>Status</span>
 						<span className='text-xs font-semibold'>Date and Time</span>
 					</div>
