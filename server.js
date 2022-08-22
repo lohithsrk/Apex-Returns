@@ -6,10 +6,17 @@ const path = require('path');
 const session = require('express-session')
 const cors = require('cors');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 
 const app = express();
 
 const db = require('./database');
+
+mongoose.connect('mongodb://localhost:27017/apex', { useNewUrlParser: true }).then(() => {
+    console.log('Connected to MongoDB');
+}).catch(err => {
+    console.log(err);
+})
 
 const authRoute = require('./routes/auth.route');
 const paymentRoute = require('./routes/payment.route');
