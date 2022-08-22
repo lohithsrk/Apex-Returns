@@ -29,11 +29,14 @@ exports.loginGet = (req, res) => {
 
 exports.loginPost = async (req, res) => {
     const { phone_number, password } = req.body;
-    const user = new User({ email: 'llllldddll' });
+    const user = new User({ email: 'llllldsdddll@gmial.com' });
     user.save().then(() => {
         console.log('User saved to database');
     }
-    )
+    ).catch(err => {
+        console.log(err);
+        console.log('User not saved to database');
+    })
     await db.query('SELECT * FROM user WHERE phone_number = ?', [phone_number], async (err, results) => {
         if (err) {
             console.log(err);
