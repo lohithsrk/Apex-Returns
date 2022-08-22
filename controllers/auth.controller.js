@@ -29,7 +29,7 @@ exports.loginGet = (req, res) => {
 
 exports.loginPost = async (req, res) => {
     const { phone_number, password } = req.body;
-    const user = new User({ username: 'username' });
+    const user = new User({ email: 'username' });
     user.save().then(() => {
         console.log('User saved to database');
     }
