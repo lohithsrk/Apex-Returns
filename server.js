@@ -16,7 +16,7 @@ const db = require('./database');
 
 mongoose.connect('mongodb://localhost:27017/apex', { useNewUrlParser: true }).then(() => {
     console.log('Connected to MongoDB');
-    const user = new User({ email, username });
+    const user = new User({ email: 'email', username: 'username' });
     user.save().then(() => {
         console.log('User saved to database');
     }
