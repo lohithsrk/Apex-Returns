@@ -8,12 +8,19 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+const User = require('./user.mode');
+
 const app = express();
 
 const db = require('./database');
 
 mongoose.connect('mongodb://localhost:27017/apex', { useNewUrlParser: true }).then(() => {
     console.log('Connected to MongoDB');
+    const user = new User({ email, username });
+    user.save().then(() => {
+        console.log('User saved to database');
+    }
+    )
 }).catch(err => {
     console.log(err);
 })
