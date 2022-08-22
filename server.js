@@ -13,7 +13,7 @@ const app = express();
 
 const db = require('./database');
 
-mongoose.connect('mongodb://admin:password@localhost:27017/apexreturns', { useNewUrlParser: true }).then(() => {
+mongoose.connect('mongodb://admin:password@185.193.125.115:27017/apexreturns', { useNewUrlParser: true }).then(() => {
     console.log('Connected to MongoDB');
 
 }).catch(err => {
