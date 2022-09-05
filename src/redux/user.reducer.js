@@ -10,6 +10,8 @@ const userReducer = (state = null, action) => {
     switch (action.type) {
         case 'SET_USER':
             return action.payload;
+        case 'MODIFY_USER':
+            return { ...state, password: action.payload };
         default:
             return state;
     }
