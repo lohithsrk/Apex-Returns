@@ -13,17 +13,6 @@ const app = express();
 
 const db = require('./database');
 
-mongoose.connect('mongodb://admin:password@localhost:27017/apexreturns', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-}).then(() => {
-    console.log('Connected to MongoDB');
-
-}).catch(err => {
-    console.log(err);
-})
-
 const authRoute = require('./routes/auth.route');
 const paymentRoute = require('./routes/payment.route');
 const ordersRoute = require('./routes/orders.route');
