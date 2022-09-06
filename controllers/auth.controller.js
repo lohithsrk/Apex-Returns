@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
-const User = require('../user.mode');
 const db = require('../database');
 
 exports.loginGet = (req, res) => {
@@ -29,14 +28,6 @@ exports.loginGet = (req, res) => {
 
 exports.loginPost = async (req, res) => {
     const { phone_number, password } = req.body;
-    const user = new User({ email: 'lllsddddsll@gmiacl.com' });
-    user.save().then(() => {
-        console.log('User saved to database');
-    }
-    ).catch(err => {
-        console.log(err);
-        console.log('User not saved to database');
-    })
     await db.query('SELECT * FROM user WHERE phone_number = ?', [phone_number], async (err, results) => {
         if (err) {
             console.log(err);
